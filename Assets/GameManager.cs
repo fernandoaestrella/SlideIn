@@ -132,15 +132,15 @@ public class GameManager : MonoBehaviour
             {
                 move(easternTile, "E");
             }
-            if ((westernTile != null) && (westernTile.isTraversable == true) && (horizontalMovement < 0))
+            else if ((westernTile != null) && (westernTile.isTraversable == true) && (horizontalMovement < 0))
             {
                 move(westernTile, "W");
             }
-            if ((northernTile != null) && (northernTile.isTraversable == true) && (verticalMovement > 0))
+            else if ((northernTile != null) && (northernTile.isTraversable == true) && (verticalMovement > 0))
             {
                 move(northernTile, "N");
             }
-            if ((southernTile != null) && (southernTile.isTraversable == true) && (verticalMovement < 0))
+            else if ((southernTile != null) && (southernTile.isTraversable == true) && (verticalMovement < 0))
             {
                 move(southernTile, "S");
             }
@@ -154,6 +154,7 @@ public class GameManager : MonoBehaviour
         {
             if (currentTile.modifier.modifierName.Equals("GOAL"))
             {
+                Destroy(currentUnit.GetComponent<SpriteRenderer>());
                 Destroy(currentUnit);
                 score += 1;
             }
