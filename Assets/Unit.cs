@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    public bool moving;
+    public bool isMoving;
     public string direction; //change to enum
     public Vector3 position;
 
