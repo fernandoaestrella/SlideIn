@@ -128,33 +128,21 @@ public class GameManager : MonoBehaviour
 
         if (currentUnit.isMoving == false)
         {
-            if (horizontalMovement > 0)
+            if ((easternTile != null) && (easternTile.isTraversable == true) && (horizontalMovement > 0))
             {
-                if ((easternTile != null) && (easternTile.isTraversable == true))
-                {
-                    move(easternTile, "E");
-                }
+                move(easternTile, "E");
             }
-            else if (horizontalMovement < 0)
+            if ((westernTile != null) && (westernTile.isTraversable == true) && (horizontalMovement < 0))
             {
-                if ((westernTile != null) && (westernTile.isTraversable == true))
-                {
-                    move(westernTile, "W");
-                }
+                move(westernTile, "W");
             }
-            else if (verticalMovement > 0)
+            if ((northernTile != null) && (northernTile.isTraversable == true) && (verticalMovement > 0))
             {
-                if ((northernTile != null) && (northernTile.isTraversable == true))
-                {
-                    move(northernTile, "N");
-                }
+                move(northernTile, "N");
             }
-            else if (verticalMovement < 0)
+            if ((southernTile != null) && (southernTile.isTraversable == true) && (verticalMovement < 0))
             {
-                if ((southernTile != null) && (southernTile.isTraversable == true))
-                {
-                    move(southernTile, "S");
-                }
+                move(southernTile, "S");
             }
             else
             {
@@ -164,35 +152,31 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (currentUnit.isMoving)
+            if (currentTile.modifier.modifierName.Equals("GOAL"))
             {
-                if (currentTile.modifier.modifierName.Equals("GOAL"))
-                {
-                    Destroy(currentUnit);
-                    score += 1;
-                }
-                else
-                if ((currentUnit.direction.Equals("E")) && ((easternTile != null) && (easternTile.isTraversable)))
-                {
-                    move(easternTile, "E");
-                }
-                else if ((currentUnit.direction.Equals("W")) && ((westernTile != null) && (westernTile.isTraversable)))
-                {
-                    move(westernTile, "W");
-                }
-                else if ((currentUnit.direction.Equals("N")) && ((northernTile != null) && (northernTile.isTraversable)))
-                {
-                    move(northernTile, "N");
-                }
-                else if ((currentUnit.direction.Equals("S")) && ((southernTile != null) && (southernTile.isTraversable)))
-                {
-                    move(southernTile, "S");
-                }
-                else
-                {
-                    currentUnit.isMoving = false;
-                    currentTile.isTraversable = false;
-                }
+                Destroy(currentUnit);
+                score += 1;
+            }
+            else if ((currentUnit.direction.Equals("E")) && ((easternTile != null) && (easternTile.isTraversable)))
+            {
+                move(easternTile, "E");
+            }
+            else if ((currentUnit.direction.Equals("W")) && ((westernTile != null) && (westernTile.isTraversable)))
+            {
+                move(westernTile, "W");
+            }
+            else if ((currentUnit.direction.Equals("N")) && ((northernTile != null) && (northernTile.isTraversable)))
+            {
+                move(northernTile, "N");
+            }
+            else if ((currentUnit.direction.Equals("S")) && ((southernTile != null) && (southernTile.isTraversable)))
+            {
+                move(southernTile, "S");
+            }
+            else
+            {
+                currentUnit.isMoving = false;
+                currentTile.isTraversable = false;
             }
         }
     }
