@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameBoard gameBoard;
-    //public ArrayList playerUnits = new ArrayList();
+    public GameBoard currentGameBoard;
     public Tile tile;
     public Unit unit;
     Tile currentTile;
@@ -19,16 +18,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //GameBoard currentGameBoard = new GameBoard();
-        //currentGameBoard = Instantiate(gameBoard);
-        gameBoard.board = new Tile[15, 9];
+        currentGameBoard.board = new Tile[15, 9];
 
         createBoard();
 
         // Add traversable tiles
-        for (int i = 0; i < gameBoard.board.GetLength(0); i++)
+        for (int i = 0; i < currentGameBoard.board.GetLength(0); i++)
         {
-            for (int j = 0; j < gameBoard.board.GetLength(1); j++)
+            for (int j = 0; j < currentGameBoard.board.GetLength(1); j++)
             {
                 Tile currentTile = new Tile();
                 currentTile = Instantiate(tile);
@@ -37,13 +34,14 @@ public class GameManager : MonoBehaviour
                 currentTile.modifier = new Modifier();
                 currentTile.modifier.modifierName = "TILE";
 
+                // Change tile colors intermitently
                 if ((i + j) % 2 == 0)
                 {
                     currentTile.GetComponent<SpriteRenderer>().color = Color.gray;
                 }
 
-                // Makes top and bottom row untraversable
-                if ((j == 0) || (j == gameBoard.board.GetLength(1) - 1))
+                // Make top and bottom row untraversable
+                if ((j == 0) || (j == currentGameBoard.board.GetLength(1) - 1))
                 {
                     currentTile.modifier.modifierName = "UNPASSABLE";
                     currentTile.isTraversable = false;
@@ -57,16 +55,17 @@ public class GameManager : MonoBehaviour
                     currentTile.modifier.modifierName = "GOAL";
                 }
 
-                gameBoard.board[i, j] = currentTile;
+                // Save the tile in the gameboard
+                currentGameBoard.board[i, j] = currentTile;
 
                 Debug.Log(i + ", " + j);
             }
         }
 
         unit = Instantiate(unit);
-        unit.position = gameBoard.board[1, 1].GetComponent<Transform>().position;
+        unit.position = currentGameBoard.board[1, 1].GetComponent<Transform>().position;
         unit.GetComponent<Transform>().position = unit.position;
-        gameBoard.board[1, 1].unit = unit;
+        currentGameBoard.board[1, 1].unit = unit;
     }
 
     private void createBoard()
@@ -77,12 +76,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTile = gameBoard.board[(int)unit.position.x, (int)unit.position.y];
+        currentTile = currentGameBoard.board[(int)unit.position.x, (int)unit.position.y];
 
         // If eastern tile exists
-        if (currentTile.GetComponent<Transform>().position.x < gameBoard.board.GetLength(0) - 1)
+        if (currentTile.GetComponent<Transform>().position.x < currentGameBoard.board.GetLength(0) - 1)
         {
-            easternTile = gameBoard.board[(int)unit.position.x + 1, (int)unit.position.y];
+            easternTile = currentGameBoard.board[(int)unit.position.x + 1, (int)unit.position.y];
         }
         else
         {
@@ -92,7 +91,7 @@ public class GameManager : MonoBehaviour
         // If western tile exists
         if (currentTile.GetComponent<Transform>().position.x > 0)
         {
-            westernTile = gameBoard.board[(int)unit.position.x - 1, (int)unit.position.y];
+            westernTile = currentGameBoard.board[(int)unit.position.x - 1, (int)unit.position.y];
         }
         else
         {
@@ -100,9 +99,9 @@ public class GameManager : MonoBehaviour
         }
 
         // If northern tile exists
-        if (currentTile.GetComponent<Transform>().position.y < gameBoard.board.GetLength(1) - 1)
+        if (currentTile.GetComponent<Transform>().position.y < currentGameBoard.board.GetLength(1) - 1)
         {
-            northernTile = gameBoard.board[(int)unit.position.x, (int)unit.position.y + 1];
+            northernTile = currentGameBoard.board[(int)unit.position.x, (int)unit.position.y + 1];
         }
         else
         {
@@ -112,7 +111,7 @@ public class GameManager : MonoBehaviour
         // If southern tile exists
         if (currentTile.GetComponent<Transform>().position.y > 0)
         {
-            southernTile = gameBoard.board[(int)unit.position.x, (int)unit.position.y - 1];
+            southernTile = currentGameBoard.board[(int)unit.position.x, (int)unit.position.y - 1];
         }
         else
         {
