@@ -18,17 +18,29 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentGameBoard.board = new Tile[15, 9];
-
         createBoard();
 
-        // Add traversable tiles
+        createUnit();
+    }
+
+    private void createUnit()
+    {
+        unit = Instantiate(unit);
+        unit.position = currentGameBoard.board[1, 1].GetComponent<Transform>().position;
+        unit.GetComponent<Transform>().position = unit.position;
+        currentGameBoard.board[1, 1].unit = unit;
+    }
+
+    private void createBoard()
+    {
+        currentGameBoard.board = new Tile[15, 9];
+
         for (int i = 0; i < currentGameBoard.board.GetLength(0); i++)
         {
             for (int j = 0; j < currentGameBoard.board.GetLength(1); j++)
             {
-                Tile currentTile = new Tile();
-                currentTile = Instantiate(tile);
+                // Add traversable tiles
+                Tile currentTile = Instantiate(tile);
                 currentTile.isTraversable = true;
                 currentTile.GetComponent<Transform>().position = new Vector3(i, j, 0);
                 currentTile.modifier = new Modifier();
@@ -52,7 +64,7 @@ public class GameManager : MonoBehaviour
                 if ((i == 14) && (j == 4))
                 {
                     currentTile.GetComponent<SpriteRenderer>().color = Color.red;
-                    currentTile.modifier.modifierName = "GOAL"; // ok now i really did it
+                    currentTile.modifier.modifierName = "GOAL";
                 }
 
                 // Save the tile in the gameboard
@@ -61,16 +73,6 @@ public class GameManager : MonoBehaviour
                 Debug.Log(i + ", " + j);
             }
         }
-
-        unit = Instantiate(unit);
-        unit.position = currentGameBoard.board[1, 1].GetComponent<Transform>().position;
-        unit.GetComponent<Transform>().position = unit.position;
-        currentGameBoard.board[1, 1].unit = unit;
-    }
-
-    private void createBoard()
-    {
-        
     }
 
     // Update is called once per frame
