@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
                 if ((i == 14) && (j == 4))
                 {
                     currentTile.GetComponent<SpriteRenderer>().color = Color.red;
-                    currentTile.modifier.modifierName = "GOAL"; // test comment!
+                    currentTile.modifier.modifierName = "GOAL"; // lets imagine i fixed it
                 }
 
                 // Save the tile in the gameboard
