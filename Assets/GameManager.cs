@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public GameBoard currentGameBoard;
     public Tile tile;
-    public Unit unit;
+    public Unit currentUnit;
     Tile currentTile;
     Tile easternTile;
     Tile westernTile;
@@ -25,10 +25,13 @@ public class GameManager : MonoBehaviour
 
     private void createUnit()
     {
-        unit = Instantiate(unit);
-        unit.position = currentGameBoard.board[1, 1].GetComponent<Transform>().position;
-        unit.GetComponent<Transform>().position = unit.position;
-        currentGameBoard.board[1, 1].unit = unit;
+        currentUnit = Instantiate(currentUnit);
+        // Tell unit which position it holds
+        currentUnit.position = currentGameBoard.board[1, 1].GetComponent<Transform>().position;
+        // Move unit to its position
+        currentUnit.GetComponent<Transform>().position = currentUnit.position;
+        // Tell tile which unit it holds
+        currentGameBoard.board[1, 1].unit = currentUnit;
     }
 
     private void createBoard()
@@ -78,12 +81,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTile = currentGameBoard.board[(int)unit.position.x, (int)unit.position.y];
+        currentTile = currentGameBoard.board[(int)currentUnit.position.x, (int)currentUnit.position.y];
 
         // If eastern tile exists
         if (currentTile.GetComponent<Transform>().position.x < currentGameBoard.board.GetLength(0) - 1)
         {
-            easternTile = currentGameBoard.board[(int)unit.position.x + 1, (int)unit.position.y];
+            easternTile = currentGameBoard.board[(int)currentUnit.position.x + 1, (int)currentUnit.position.y];
         }
         else
         {
@@ -93,7 +96,7 @@ public class GameManager : MonoBehaviour
         // If western tile exists
         if (currentTile.GetComponent<Transform>().position.x > 0)
         {
-            westernTile = currentGameBoard.board[(int)unit.position.x - 1, (int)unit.position.y];
+            westernTile = currentGameBoard.board[(int)currentUnit.position.x - 1, (int)currentUnit.position.y];
         }
         else
         {
@@ -103,7 +106,7 @@ public class GameManager : MonoBehaviour
         // If northern tile exists
         if (currentTile.GetComponent<Transform>().position.y < currentGameBoard.board.GetLength(1) - 1)
         {
-            northernTile = currentGameBoard.board[(int)unit.position.x, (int)unit.position.y + 1];
+            northernTile = currentGameBoard.board[(int)currentUnit.position.x, (int)currentUnit.position.y + 1];
         }
         else
         {
@@ -113,128 +116,95 @@ public class GameManager : MonoBehaviour
         // If southern tile exists
         if (currentTile.GetComponent<Transform>().position.y > 0)
         {
-            southernTile = currentGameBoard.board[(int)unit.position.x, (int)unit.position.y - 1];
+            southernTile = currentGameBoard.board[(int)currentUnit.position.x, (int)currentUnit.position.y - 1];
         }
         else
         {
             southernTile = null;
         }
 
-        if (unit.moving == false)
-        {
-            float horizontalMovement = Input.GetAxis("Horizontal");
-            float verticalMovement = Input.GetAxis("Vertical");
+        float horizontalMovement = Input.GetAxis("Horizontal");
+        float verticalMovement = Input.GetAxis("Vertical");
 
+        if (currentUnit.isMoving == false)
+        {
             if (horizontalMovement > 0)
             {
                 if ((easternTile != null) && (easternTile.isTraversable == true))
                 {
-                    moveEast();
+                    move(easternTile, "E");
                 }
             }
             else if (horizontalMovement < 0)
             {
                 if ((westernTile != null) && (westernTile.isTraversable == true))
                 {
-                    moveWest();
+                    move(westernTile, "W");
                 }
             }
             else if (verticalMovement > 0)
             {
                 if ((northernTile != null) && (northernTile.isTraversable == true))
                 {
-                    moveNorth();
+                    move(northernTile, "N");
                 }
             }
             else if (verticalMovement < 0)
             {
                 if ((southernTile != null) && (southernTile.isTraversable == true))
                 {
-                    moveSouth();
+                    move(southernTile, "S");
                 }
+            }
+            else
+            {
+                // Blink selected unit
+
             }
         }
         else
         {
-            if (unit.moving)
+            if (currentUnit.isMoving)
             {
                 if (currentTile.modifier.modifierName.Equals("GOAL"))
                 {
-                    Destroy(unit);
+                    Destroy(currentUnit);
                     score += 1;
                 }
                 else
-                if ((unit.direction.Equals("E")) && ((easternTile != null) && (easternTile.isTraversable)))
+                if ((currentUnit.direction.Equals("E")) && ((easternTile != null) && (easternTile.isTraversable)))
                 {
-                    moveEast();
+                    move(easternTile, "E");
                 }
-                else if ((unit.direction.Equals("W")) && ((westernTile != null) && (westernTile.isTraversable)))
+                else if ((currentUnit.direction.Equals("W")) && ((westernTile != null) && (westernTile.isTraversable)))
                 {
-                    moveWest();
+                    move(westernTile, "W");
                 }
-                else if ((unit.direction.Equals("N")) && ((northernTile != null) && (northernTile.isTraversable)))
+                else if ((currentUnit.direction.Equals("N")) && ((northernTile != null) && (northernTile.isTraversable)))
                 {
-                    moveNorth();
+                    move(northernTile, "N");
                 }
-                else if ((unit.direction.Equals("S")) && ((southernTile != null) && (southernTile.isTraversable)))
+                else if ((currentUnit.direction.Equals("S")) && ((southernTile != null) && (southernTile.isTraversable)))
                 {
-                    moveSouth();
+                    move(southernTile, "S");
                 }
                 else
                 {
-                    unit.moving = false;
+                    currentUnit.isMoving = false;
                     currentTile.isTraversable = false;
                 }
             }
         }
     }
 
-    private void moveSouth()
+    private void move(Tile tileToMoveTo, string direction)
     {
-        unit.moving = true;
-        unit.direction = "S";
+        currentUnit.isMoving = true;
+        currentUnit.direction = direction;
         currentTile.unit = null;
-        unit.position = southernTile.GetComponent<Transform>().position;
-        unit.GetComponent<Transform>().position = unit.position;
-        southernTile.unit = unit;
+        currentUnit.position = tileToMoveTo.GetComponent<Transform>().position;
+        currentUnit.GetComponent<Transform>().position = currentUnit.position;
+        tileToMoveTo.unit = currentUnit;
         currentTile.isTraversable = true;
-    }
-
-    private void moveNorth()
-    {
-        unit.moving = true;
-        unit.direction = "N";
-        currentTile.unit = null;
-        unit.position = northernTile.GetComponent<Transform>().position;
-        unit.GetComponent<Transform>().position = unit.position;
-        northernTile.unit = unit;
-        currentTile.isTraversable = true;
-    }
-
-    private void moveWest()
-    {
-        unit.moving = true;
-        unit.direction = "W";
-        currentTile.unit = null;
-        unit.position = westernTile.GetComponent<Transform>().position;
-        unit.GetComponent<Transform>().position = unit.position;
-        westernTile.unit = unit;
-        currentTile.isTraversable = true;
-    }
-
-    private void moveEast()
-    {
-        unit.moving = true;
-        unit.direction = "E";
-        currentTile.unit = null;
-        unit.position = easternTile.GetComponent<Transform>().position;
-        unit.GetComponent<Transform>().position = unit.position;
-        easternTile.unit = unit;
-        currentTile.isTraversable = true;
-    }
-
-    private void move(Tile tileToMoveTo)
-    {
-        
     }
 }
