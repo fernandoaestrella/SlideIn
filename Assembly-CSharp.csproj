@@ -65,6 +65,7 @@
     <Compile Include="Assets\GameBoard.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Modifier.cs" />
+    <Compile Include="Assets\Player.cs" />
     <Compile Include="Assets\Tile.cs" />
     <Compile Include="Assets\Unit.cs" />
     <Reference Include="Unity.Timeline.Editor">

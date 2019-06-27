@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameBoard currentGameBoard;
     public Tile tile;
     public Unit currentUnit;
+    //ArrayList player1Team;
     Tile currentTile;
     Tile easternTile;
     Tile westernTile;
@@ -20,11 +21,13 @@ public class GameManager : MonoBehaviour
     {
         createBoard();
 
+        //player1Team = new ArrayList(4);
         createUnit();
     }
 
     private void createUnit()
     {
+        
         currentUnit = Instantiate(currentUnit);
         // Tell unit which position it holds
         currentUnit.position = currentGameBoard.board[1, 1].GetComponent<Transform>().position;
