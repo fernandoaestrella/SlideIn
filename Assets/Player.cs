@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    int score;
-    ArrayList team;
+    public int score;
+    public ArrayList team;
 }
