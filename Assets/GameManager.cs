@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     {
         createBoard();
 
-        players = new ArrayList(16); // Initial size set to avoid some overflow cycles
+        players = new ArrayList(16); // Initial size set to avoid some overflow cycles (wherein inserting an element in the array exceeds its capacity and activates a script that creates a new, bigger array)
         players.Insert(0, new Player());
         players.Insert(1, new Player());
 
@@ -99,35 +99,35 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (selectedUnit == null)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
+            int layerMask = 1 << 9;
+            Vector2 origin = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            RaycastHit2D hit = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, layerMask);
+
+            //Does the ray intersect any objects which are in the player layer.
+            if ((hit.transform != null) && (hit.transform.gameObject.name.Equals("Unit(Clone)")))
             {
-                Vector2 origin = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
-                                             Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-                RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero, 0f);
+                Debug.Log("The ray hit a player");
+                selectedUnit = hit.transform.gameObject.GetComponent<Unit>();
+            }
+            else
+            {
+                hit = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, ~layerMask);
 
-                if (hit)
+                // Does the ray intersect any objects which are in the game board layer.
+                if (hit.transform.gameObject.name.Equals("Tile(Clone)"))
                 {
-                    print(hit.transform.gameObject.name);
-
-                    int layerMask = 1 << 9;
-
-                    // Does the ray intersect any objects which are in the player layer.
-                    if (Physics2D.Raycast(hit.transform.position, Vector3.forward, Mathf.Infinity, layerMask))
-                    {
-                        Debug.Log("The ray hit the player");
-                        if (hit.transform.gameObject.name.Equals("Unit(Clone)"))
-                        {
-                            selectedUnit = hit.transform.gameObject.GetComponent<Unit>();
-                        }
-                    }
-
-                    
+                    Debug.Log("The ray hit a tile");
+                    selectedUnit = null;
+                    //selectedUnit = hit.transform.gameObject.GetComponent<Unit>();
                 }
             }
+
+            // What if you hit outside the gameboard?
         }
-        else
+
+        if (selectedUnit != null)
         {
             //((Player)players[0]).team.Add(createUnit());
             currentTile = currentGameBoard.board[(int)selectedUnit.position.x, (int)selectedUnit.position.y];
