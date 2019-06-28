@@ -232,11 +232,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d475d5644f44bb148a412e3d00d7c159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 808386581}
   currentGameBoard: {fileID: 4754399610671084728, guid: 629f2e274dfcf604a98ad08c2b047703,
     type: 3}
   tile: {fileID: 1371457693959566052, guid: 6a3c0f2b9bf3f89418f7a4f8484636b9, type: 3}
-  currentUnit: {fileID: 6159666709500430168, guid: a0676b4699f127e4db71cc42cb3d60dd,
-    type: 3}
+  unit: {fileID: 6159666709500430168, guid: a0676b4699f127e4db71cc42cb3d60dd, type: 3}
 --- !u!4 &1517158473
 Transform:
   m_ObjectHideFlags: 0
