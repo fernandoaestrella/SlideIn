@@ -5,36 +5,44 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public Camera mainCamera;
     public GameBoard currentGameBoard;
     public Tile tile;
-    public Unit currentUnit;
-    //ArrayList player1Team;
+    public Unit unit;
+    public Unit selectedUnit;
+    ArrayList players;
     Tile currentTile;
     Tile easternTile;
     Tile westernTile;
     Tile northernTile;
     Tile southernTile;
-    int score;
 
     // Start is called before the first frame update
     void Start()
     {
         createBoard();
 
-        //player1Team = new ArrayList(4);
+        players = new ArrayList(16); // Initial size set to avoid some overflow cycles
+        players.Insert(0, new Player());
+        players.Insert(1, new Player());
+
+        ((Player)players[0]).team = new ArrayList(16); // Initial size set to avoid some overflow cycles
+        ((Player)players[1]).team = new ArrayList(16); // Initial size set to avoid some overflow cycles
+
         createUnit();
     }
 
-    private void createUnit()
+    private Unit createUnit()
     {
-        
-        currentUnit = Instantiate(currentUnit);
+        Unit newUnit = Instantiate(unit);
         // Tell unit which position it holds
-        currentUnit.position = currentGameBoard.board[1, 1].GetComponent<Transform>().position;
+        newUnit.position = currentGameBoard.board[1, 1].GetComponent<Transform>().position;
         // Move unit to its position
-        currentUnit.GetComponent<Transform>().position = currentUnit.position;
+        newUnit.GetComponent<Transform>().position = newUnit.position;
         // Tell tile which unit it holds
-        currentGameBoard.board[1, 1].unit = currentUnit;
+        currentGameBoard.board[1, 1].unit = newUnit;
+
+        return newUnit;
     }
 
     private void createBoard()
@@ -66,11 +74,18 @@ public class GameManager : MonoBehaviour
                     currentTile.GetComponent<SpriteRenderer>().color = Color.black;
                 }
 
+                // Set the start
+                if ((i == 1) && (j == 2))
+                {
+                    currentTile.modifier.modifierName = "START";
+                    currentTile.GetComponent<SpriteRenderer>().color = Color.red;
+                }
+
                 // Set the goal
                 if ((i == 14) && (j == 4))
                 {
-                    currentTile.GetComponent<SpriteRenderer>().color = Color.red;
                     currentTile.modifier.modifierName = "GOAL";
+                    currentTile.GetComponent<SpriteRenderer>().color = Color.green;
                 }
 
                 // Save the tile in the gameboard
@@ -84,115 +99,149 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTile = currentGameBoard.board[(int)currentUnit.position.x, (int)currentUnit.position.y];
-
-        // If eastern tile exists
-        if (currentTile.GetComponent<Transform>().position.x < currentGameBoard.board.GetLength(0) - 1)
+        if (selectedUnit == null)
         {
-            easternTile = currentGameBoard.board[(int)currentUnit.position.x + 1, (int)currentUnit.position.y];
-        }
-        else
-        {
-            easternTile = null;
-        }
-
-        // If western tile exists
-        if (currentTile.GetComponent<Transform>().position.x > 0)
-        {
-            westernTile = currentGameBoard.board[(int)currentUnit.position.x - 1, (int)currentUnit.position.y];
-        }
-        else
-        {
-            westernTile = null;
-        }
-
-        // If northern tile exists
-        if (currentTile.GetComponent<Transform>().position.y < currentGameBoard.board.GetLength(1) - 1)
-        {
-            northernTile = currentGameBoard.board[(int)currentUnit.position.x, (int)currentUnit.position.y + 1];
-        }
-        else
-        {
-            northernTile = null;
-        }
-
-        // If southern tile exists
-        if (currentTile.GetComponent<Transform>().position.y > 0)
-        {
-            southernTile = currentGameBoard.board[(int)currentUnit.position.x, (int)currentUnit.position.y - 1];
-        }
-        else
-        {
-            southernTile = null;
-        }
-
-        float horizontalMovement = Input.GetAxis("Horizontal");
-        float verticalMovement = Input.GetAxis("Vertical");
-
-        if (currentUnit.isMoving == false)
-        {
-            if ((easternTile != null) && (easternTile.isTraversable == true) && (horizontalMovement > 0))
+            if (Input.GetMouseButtonDown(0))
             {
-                move(easternTile, "E");
+                Vector2 origin = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
+                                             Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+                RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero, 0f);
+
+                if (hit)
+                {
+                    print(hit.transform.gameObject.name);
+
+                    int layerMask = 1 << 9;
+
+                    // Does the ray intersect any objects which are in the player layer.
+                    if (Physics2D.Raycast(hit.transform.position, Vector3.forward, Mathf.Infinity, layerMask))
+                    {
+                        Debug.Log("The ray hit the player");
+                        if (hit.transform.gameObject.name.Equals("Unit(Clone)"))
+                        {
+                            selectedUnit = hit.transform.gameObject.GetComponent<Unit>();
+                        }
+                    }
+
+                    
+                }
             }
-            else if ((westernTile != null) && (westernTile.isTraversable == true) && (horizontalMovement < 0))
+        }
+        else
+        {
+            //((Player)players[0]).team.Add(createUnit());
+            currentTile = currentGameBoard.board[(int)selectedUnit.position.x, (int)selectedUnit.position.y];
+
+            // If eastern tile exists
+            if (currentTile.GetComponent<Transform>().position.x < currentGameBoard.board.GetLength(0) - 1)
             {
-                move(westernTile, "W");
-            }
-            else if ((northernTile != null) && (northernTile.isTraversable == true) && (verticalMovement > 0))
-            {
-                move(northernTile, "N");
-            }
-            else if ((southernTile != null) && (southernTile.isTraversable == true) && (verticalMovement < 0))
-            {
-                move(southernTile, "S");
+                easternTile = currentGameBoard.board[(int)selectedUnit.position.x + 1, (int)selectedUnit.position.y];
             }
             else
             {
-                // Blink selected unit
+                easternTile = null;
+            }
 
-            }
-        }
-        else
-        {
-            if (currentTile.modifier.modifierName.Equals("GOAL"))
+            // If western tile exists
+            if (currentTile.GetComponent<Transform>().position.x > 0)
             {
-                Destroy(currentUnit.GetComponent<SpriteRenderer>());
-                Destroy(currentUnit);
-                score += 1;
-            }
-            else if ((currentUnit.direction.Equals("E")) && ((easternTile != null) && (easternTile.isTraversable)))
-            {
-                move(easternTile, "E");
-            }
-            else if ((currentUnit.direction.Equals("W")) && ((westernTile != null) && (westernTile.isTraversable)))
-            {
-                move(westernTile, "W");
-            }
-            else if ((currentUnit.direction.Equals("N")) && ((northernTile != null) && (northernTile.isTraversable)))
-            {
-                move(northernTile, "N");
-            }
-            else if ((currentUnit.direction.Equals("S")) && ((southernTile != null) && (southernTile.isTraversable)))
-            {
-                move(southernTile, "S");
+                westernTile = currentGameBoard.board[(int)selectedUnit.position.x - 1, (int)selectedUnit.position.y];
             }
             else
             {
-                currentUnit.isMoving = false;
-                currentTile.isTraversable = false;
+                westernTile = null;
+            }
+
+            // If northern tile exists
+            if (currentTile.GetComponent<Transform>().position.y < currentGameBoard.board.GetLength(1) - 1)
+            {
+                northernTile = currentGameBoard.board[(int)selectedUnit.position.x, (int)selectedUnit.position.y + 1];
+            }
+            else
+            {
+                northernTile = null;
+            }
+
+            // If southern tile exists
+            if (currentTile.GetComponent<Transform>().position.y > 0)
+            {
+                southernTile = currentGameBoard.board[(int)selectedUnit.position.x, (int)selectedUnit.position.y - 1];
+            }
+            else
+            {
+                southernTile = null;
+            }
+
+            float horizontalMovement = Input.GetAxis("Horizontal");
+            float verticalMovement = Input.GetAxis("Vertical");
+
+            if (selectedUnit.isMoving == false)
+            {
+                if ((easternTile != null) && (easternTile.isTraversable == true) && (horizontalMovement > 0))
+                {
+                    move(easternTile, "E");
+                }
+                else if ((westernTile != null) && (westernTile.isTraversable == true) && (horizontalMovement < 0))
+                {
+                    move(westernTile, "W");
+                }
+                else if ((northernTile != null) && (northernTile.isTraversable == true) && (verticalMovement > 0))
+                {
+                    move(northernTile, "N");
+                }
+                else if ((southernTile != null) && (southernTile.isTraversable == true) && (verticalMovement < 0))
+                {
+                    move(southernTile, "S");
+                }
+                else
+                {
+                    // Blink selected unit
+
+                }
+            }
+            else
+            {
+                if (currentTile.modifier.modifierName.Equals("GOAL"))
+                {
+                    Destroy(selectedUnit.GetComponent<SpriteRenderer>());
+                    Destroy(selectedUnit);
+                    ((Player) players[0]).score += 1;
+                }
+                else if ((selectedUnit.direction.Equals("E")) && ((easternTile != null) && (easternTile.isTraversable)))
+                {
+                    move(easternTile, "E");
+                }
+                else if ((selectedUnit.direction.Equals("W")) && ((westernTile != null) && (westernTile.isTraversable)))
+                {
+                    move(westernTile, "W");
+                }
+                else if ((selectedUnit.direction.Equals("N")) && ((northernTile != null) && (northernTile.isTraversable)))
+                {
+                    move(northernTile, "N");
+                }
+                else if ((selectedUnit.direction.Equals("S")) && ((southernTile != null) && (southernTile.isTraversable)))
+                {
+                    move(southernTile, "S");
+                }
+                else
+                {
+                    selectedUnit.direction = "";
+                    selectedUnit.isMoving = false;
+                    currentTile.isTraversable = false;
+                }
             }
         }
+
     }
 
-    private void move(Tile tileToMoveTo, string direction)
+    void move(Tile tileToMoveTo, string direction)
     {
-        currentUnit.isMoving = true;
-        currentUnit.direction = direction;
+        selectedUnit.isMoving = true;
+        selectedUnit.direction = direction;
         currentTile.unit = null;
-        currentUnit.position = tileToMoveTo.GetComponent<Transform>().position;
-        currentUnit.GetComponent<Transform>().position = currentUnit.position;
-        tileToMoveTo.unit = currentUnit;
+        selectedUnit.position = tileToMoveTo.GetComponent<Transform>().position;
+        selectedUnit.GetComponent<Transform>().position = selectedUnit.position;
+        tileToMoveTo.unit = selectedUnit;
         currentTile.isTraversable = true;
     }
 }
