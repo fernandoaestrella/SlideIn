@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     Tile westernTile;
     Tile northernTile;
     Tile southernTile;
+    bool blinkingOff;
 
     // Start is called before the first frame update
     void Start()
@@ -29,18 +30,18 @@ public class GameManager : MonoBehaviour
         ((Player)players[0]).team = new ArrayList(16); // Initial size set to avoid some overflow cycles
         ((Player)players[1]).team = new ArrayList(16); // Initial size set to avoid some overflow cycles
 
-        createUnit();
+        //createUnit();
     }
 
     private Unit createUnit()
     {
         Unit newUnit = Instantiate(unit);
         // Tell unit which position it holds
-        newUnit.position = currentGameBoard.board[1, 1].GetComponent<Transform>().position;
+        newUnit.position = currentGameBoard.board[1, 2].GetComponent<Transform>().position;
         // Move unit to its position
         newUnit.GetComponent<Transform>().position = newUnit.position;
         // Tell tile which unit it holds
-        currentGameBoard.board[1, 1].unit = newUnit;
+        currentGameBoard.board[1, 2].unit = newUnit;
 
         return newUnit;
     }
@@ -109,6 +110,10 @@ public class GameManager : MonoBehaviour
             if ((hit.transform != null) && (hit.transform.gameObject.name.Equals("Unit(Clone)")))
             {
                 Debug.Log("The ray hit a player");
+                if (selectedUnit != null)
+                {
+                    selectedUnit.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.95f, 0.91f, 1.0f);
+                }
                 selectedUnit = hit.transform.gameObject.GetComponent<Unit>();
             }
             else
@@ -119,8 +124,20 @@ public class GameManager : MonoBehaviour
                 if (hit.transform.gameObject.name.Equals("Tile(Clone)"))
                 {
                     Debug.Log("The ray hit a tile");
-                    selectedUnit = null;
-                    //selectedUnit = hit.transform.gameObject.GetComponent<Unit>();
+                    if (selectedUnit != null)
+                    {
+                        selectedUnit.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.95f, 0.91f, 1.0f);
+                        selectedUnit = null;
+                    }
+
+                    Tile selectedTile = hit.transform.gameObject.GetComponent<Tile>();
+                    if (selectedTile.modifier.modifierName.Equals("START"))
+                    {
+                        if (selectedTile.isTraversable)
+                        {
+                            createUnit();
+                        }
+                    }
                 }
             }
 
@@ -196,7 +213,26 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     // Blink selected unit
+                    float alpha = selectedUnit.GetComponent<SpriteRenderer>().color.a;
+                    if (blinkingOff)
+                    {
+                        alpha *= 0.98f;
 
+                        if (alpha < 0.5f)
+                        {
+                            blinkingOff = false;
+                        }
+                    }
+                    else
+                    {
+                        alpha *= 1.02f;
+
+                        if (alpha > 0.98f)
+                        {
+                            blinkingOff = true;
+                        }
+                    }
+                    selectedUnit.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.95f, 0.91f, alpha);
                 }
             }
             else
