@@ -10,17 +10,21 @@ public class GameManager : MonoBehaviour
     public Tile tile;
     public Unit unit;
     public Unit selectedUnit;
-    ArrayList players;
+    public ArrayList players;
     Tile currentTile;
     Tile easternTile;
     Tile westernTile;
     Tile northernTile;
     Tile southernTile;
     bool blinkingOff;
+    float startTime;
+    public float elapsedTime;
 
     // Start is called before the first frame update
     void Start()
     {
+        startTime = Time.time;
+        elapsedTime = 0f;
         createBoard();
 
         players = new ArrayList(16); // Initial size set to avoid some overflow cycles (wherein inserting an element in the array exceeds its capacity and activates a script that creates a new, bigger array)
@@ -33,7 +37,7 @@ public class GameManager : MonoBehaviour
         ((Player)players[0]).startX = 1;
         ((Player)players[0]).startY = 4;
 
-        ((Player)players[1]).startX = 13;
+        ((Player)players[1]).startX = 11;
         ((Player)players[1]).startY = 4;
 
         ((Player)players[0]).unitColor = new Color(0.5f, 0.98f, 0.89f, 1);
@@ -59,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     private void createBoard()
     {
-        currentGameBoard.board = new Tile[15, 9];
+        currentGameBoard.board = new Tile[13, 9];
 
         for (int i = 0; i < currentGameBoard.board.GetLength(0); i++)
         {
@@ -94,7 +98,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 // Set the goal
-                if ((i == 13) && (j == 4))
+                if ((i == 11) && (j == 4))
                 {
                     currentTile.modifier.modifierName = "GOAL";
                     currentTile.GetComponent<SpriteRenderer>().color = Color.red;
@@ -111,6 +115,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        elapsedTime = Time.time - startTime;
         if (Input.GetMouseButtonDown(0))
         {
             int layerMask = 1 << 9;
