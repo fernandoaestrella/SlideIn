@@ -30,18 +30,29 @@ public class GameManager : MonoBehaviour
         ((Player)players[0]).team = new ArrayList(16); // Initial size set to avoid some overflow cycles
         ((Player)players[1]).team = new ArrayList(16); // Initial size set to avoid some overflow cycles
 
-        //createUnit();
+        ((Player)players[0]).startX = 1;
+        ((Player)players[0]).startY = 4;
+
+        ((Player)players[1]).startX = 13;
+        ((Player)players[1]).startY = 4;
+
+        ((Player)players[0]).unitColor = new Color(0.5f, 0.98f, 0.89f, 1);
+        ((Player)players[1]).unitColor = new Color(1.0f, 0.4f, 0.8f, 1);
     }
 
-    private Unit createUnit()
+    private Unit createUnit(Player player)
     {
         Unit newUnit = Instantiate(unit);
         // Tell unit which position it holds
-        newUnit.position = currentGameBoard.board[1, 2].GetComponent<Transform>().position;
+        newUnit.position = currentGameBoard.board[player.startX, player.startY].GetComponent<Transform>().position;
         // Move unit to its position
         newUnit.GetComponent<Transform>().position = newUnit.position;
         // Tell tile which unit it holds
-        currentGameBoard.board[1, 2].unit = newUnit;
+        currentGameBoard.board[player.startX, player.startY].unit = newUnit;
+        // Makes that tile untraversable
+        currentGameBoard.board[player.startX, player.startY].isTraversable = false;
+        newUnit.GetComponent<SpriteRenderer>().color = player.unitColor;
+        player.team.Add(newUnit);
 
         return newUnit;
     }
@@ -76,17 +87,17 @@ public class GameManager : MonoBehaviour
                 }
 
                 // Set the start
-                if ((i == 1) && (j == 2))
+                if ((i == 1) && (j == 4))
                 {
                     currentTile.modifier.modifierName = "START";
-                    currentTile.GetComponent<SpriteRenderer>().color = Color.red;
+                    currentTile.GetComponent<SpriteRenderer>().color = Color.blue;
                 }
 
                 // Set the goal
-                if ((i == 14) && (j == 4))
+                if ((i == 13) && (j == 4))
                 {
                     currentTile.modifier.modifierName = "GOAL";
-                    currentTile.GetComponent<SpriteRenderer>().color = Color.green;
+                    currentTile.GetComponent<SpriteRenderer>().color = Color.red;
                 }
 
                 // Save the tile in the gameboard
@@ -109,10 +120,11 @@ public class GameManager : MonoBehaviour
             //Does the ray intersect any objects which are in the player layer.
             if ((hit.transform != null) && (hit.transform.gameObject.name.Equals("Unit(Clone)")))
             {
-                Debug.Log("The ray hit a player");
                 if (selectedUnit != null)
                 {
-                    selectedUnit.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.95f, 0.91f, 1.0f);
+                    Color tmp = selectedUnit.GetComponent<SpriteRenderer>().color;
+                    tmp.a = 1;
+                    selectedUnit.GetComponent<SpriteRenderer>().color = tmp;
                 }
                 selectedUnit = hit.transform.gameObject.GetComponent<Unit>();
             }
@@ -120,13 +132,14 @@ public class GameManager : MonoBehaviour
             {
                 hit = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, ~layerMask);
 
-                // Does the ray intersect any objects which are in the game board layer.
+                // Does the ray intersect any tile in the game board layer.
                 if (hit.transform.gameObject.name.Equals("Tile(Clone)"))
                 {
-                    Debug.Log("The ray hit a tile");
                     if (selectedUnit != null)
                     {
-                        selectedUnit.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.95f, 0.91f, 1.0f);
+                        Color tmp = selectedUnit.GetComponent<SpriteRenderer>().color;
+                        tmp.a = 1;
+                        selectedUnit.GetComponent<SpriteRenderer>().color = tmp;
                         selectedUnit = null;
                     }
 
@@ -135,7 +148,14 @@ public class GameManager : MonoBehaviour
                     {
                         if (selectedTile.isTraversable)
                         {
-                            createUnit();
+                            createUnit((Player)players[0]);
+                        }
+                    }
+                    else if (selectedTile.modifier.modifierName.Equals("GOAL"))
+                    {
+                        if (selectedTile.isTraversable)
+                        {
+                            createUnit((Player)players[1]);
                         }
                     }
                 }
@@ -213,37 +233,50 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     // Blink selected unit
-                    float alpha = selectedUnit.GetComponent<SpriteRenderer>().color.a;
+                    Color tmp = selectedUnit.GetComponent<SpriteRenderer>().color;
                     if (blinkingOff)
                     {
-                        alpha *= 0.98f;
+                        tmp.a *= 0.98f;
 
-                        if (alpha < 0.5f)
+                        if (tmp.a < 0.5f)
                         {
                             blinkingOff = false;
                         }
                     }
                     else
                     {
-                        alpha *= 1.02f;
+                        tmp.a *= 1.02f;
 
-                        if (alpha > 0.98f)
+                        if (tmp.a > 0.98f)
                         {
                             blinkingOff = true;
                         }
                     }
-                    selectedUnit.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.95f, 0.91f, alpha);
+                    selectedUnit.GetComponent<SpriteRenderer>().color = tmp;
                 }
             }
             else
             {
                 if (currentTile.modifier.modifierName.Equals("GOAL"))
                 {
-                    Destroy(selectedUnit.GetComponent<SpriteRenderer>());
-                    Destroy(selectedUnit);
-                    ((Player) players[0]).score += 1;
+                    if (((Player)players[0]).team.Contains(selectedUnit))
+                    {
+                        Destroy(selectedUnit.GetComponent<SpriteRenderer>());
+                        Destroy(selectedUnit.gameObject);
+                        ((Player) players[0]).score += 1;
+                    }
                 }
-                else if ((selectedUnit.direction.Equals("E")) && ((easternTile != null) && (easternTile.isTraversable)))
+                else if (currentTile.modifier.modifierName.Equals("START"))
+                {
+                    if (((Player)players[1]).team.Contains(selectedUnit))
+                    {
+                        Destroy(selectedUnit.GetComponent<SpriteRenderer>());
+                        Destroy(selectedUnit.gameObject);
+                        ((Player)players[1]).score += 1;
+                    }
+                }
+
+                if ((selectedUnit.direction.Equals("E")) && ((easternTile != null) && (easternTile.isTraversable)))
                 {
                     move(easternTile, "E");
                 }
