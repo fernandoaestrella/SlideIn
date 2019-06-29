@@ -67,7 +67,9 @@
     <Compile Include="Assets\MainMenu.cs" />
     <Compile Include="Assets\Modifier.cs" />
     <Compile Include="Assets\Player.cs" />
+    <Compile Include="Assets\PlayerScoreDisplay.cs" />
     <Compile Include="Assets\Tile.cs" />
+    <Compile Include="Assets\TimeDisplay.cs" />
     <Compile Include="Assets\Unit.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
