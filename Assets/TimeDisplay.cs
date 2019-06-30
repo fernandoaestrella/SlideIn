@@ -11,6 +11,6 @@ public class TimeDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeDisplay.text = "Time Remaining: " + (60 - game.elapsedTime).ToString("f2");
+        timeDisplay.text = "Time Remaining: " + (game.matchDuration - game.elapsedTime).ToString("f2");
     }
 }

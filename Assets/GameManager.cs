@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,14 +18,18 @@ public class GameManager : MonoBehaviour
     Tile northernTile;
     Tile southernTile;
     bool blinkingOff;
-    float startTime;
+    public float startTime;
     public float elapsedTime;
+    public float matchDuration;
+    public GameObject inGameCanvas;
 
     // Start is called before the first frame update
     void Start()
     {
         startTime = Time.time;
         elapsedTime = 0f;
+        matchDuration = 4f;
+
         createBoard();
 
         players = new ArrayList(16); // Initial size set to avoid some overflow cycles (wherein inserting an element in the array exceeds its capacity and activates a script that creates a new, bigger array)
@@ -116,6 +121,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         elapsedTime = Time.time - startTime;
+        if (elapsedTime > matchDuration)
+        {
+            inGameCanvas.SetActive(true);
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             int layerMask = 1 << 9;
