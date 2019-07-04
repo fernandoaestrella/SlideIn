@@ -124,6 +124,8 @@ public class GameManager : MonoBehaviour
         if (elapsedTime > matchDuration)
         {
             inGameCanvas.SetActive(true);
+            
+            // Stop controlling players
         }
 
         if (Input.GetMouseButtonDown(0))

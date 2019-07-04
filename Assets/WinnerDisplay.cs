@@ -34,8 +34,7 @@ public class WinnerDisplay : MonoBehaviour
 
     public void PlayAgain()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         //((Player)game.players[0]).score = 0;
         //((Player)game.players[1]).score = 0;
         //game.startTime = Time.time;
