@@ -833,7 +833,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 1517158472}
-  matchResults: {fileID: 1112191148}
+  matchResultsText: {fileID: 0}
+  matchResultsPanel: {fileID: 0}
 --- !u!114 &1112191148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -972,7 +973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1463729137
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1069,6 +1070,7 @@ MonoBehaviour:
   tile: {fileID: 1371457693959566052, guid: 6a3c0f2b9bf3f89418f7a4f8484636b9, type: 3}
   unit: {fileID: 6159666709500430168, guid: a0676b4699f127e4db71cc42cb3d60dd, type: 3}
   selectedUnit: {fileID: 0}
+  startTime: 0
   elapsedTime: 0
   matchDuration: 0
   inGameCanvas: {fileID: 1463729136}
@@ -1169,7 +1171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1646465731
 RectTransform:
   m_ObjectHideFlags: 0
