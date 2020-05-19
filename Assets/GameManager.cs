@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     {
         startTime = Time.time;
         elapsedTime = 0f;
-        matchDuration = 4f;
+        matchDuration = 60f;
 
         createBoard();
 
@@ -60,7 +60,9 @@ public class GameManager : MonoBehaviour
         currentGameBoard.board[player.startX, player.startY].unit = newUnit;
         // Makes that tile untraversable
         currentGameBoard.board[player.startX, player.startY].isTraversable = false;
+        // Color unit
         newUnit.GetComponent<SpriteRenderer>().color = player.unitColor;
+        // Add unit to player's team
         player.team.Add(newUnit);
 
         return newUnit;
@@ -182,7 +184,7 @@ public class GameManager : MonoBehaviour
         }
 
         if (selectedUnit != null)
-        {
+        { 
             //((Player)players[0]).team.Add(createUnit());
             currentTile = currentGameBoard.board[(int)selectedUnit.position.x, (int)selectedUnit.position.y];
 
