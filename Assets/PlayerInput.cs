@@ -35,10 +35,26 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""New action"",
-                    ""type"": ""Button"",
-                    ""id"": ""abc279d5-2736-4d90-a3ba-8f61e3699666"",
-                    ""expectedControlType"": ""Button"",
+                    ""name"": ""MoveSouth"",
+                    ""type"": ""Value"",
+                    ""id"": ""9e266991-b2f0-48df-a4f8-494487f40e8c"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveEast"",
+                    ""type"": ""Value"",
+                    ""id"": ""7db91d9b-d779-43e1-a68e-334700c120e4"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveWest"",
+                    ""type"": ""Value"",
+                    ""id"": ""3a4b3f0b-157a-40ee-bae9-f51e273326b6"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -68,12 +84,34 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""24ce3f09-172f-4f1b-a2a7-bfaefdbedb6b"",
-                    ""path"": """",
+                    ""id"": ""aa253004-be52-4c83-9223-de14e9850649"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""New action"",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""MoveSouth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3fbb3c4c-41e5-4f9f-a0cc-bbd454a77c2a"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""MoveEast"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b28ca71-2b74-419c-8a80-21d43445ef28"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""MoveWest"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -103,7 +141,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Select = m_Player.FindAction("Select", throwIfNotFound: true);
         m_Player_MoveNorth = m_Player.FindAction("MoveNorth", throwIfNotFound: true);
-        m_Player_Newaction = m_Player.FindAction("New action", throwIfNotFound: true);
+        m_Player_MoveSouth = m_Player.FindAction("MoveSouth", throwIfNotFound: true);
+        m_Player_MoveEast = m_Player.FindAction("MoveEast", throwIfNotFound: true);
+        m_Player_MoveWest = m_Player.FindAction("MoveWest", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -155,14 +195,18 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Select;
     private readonly InputAction m_Player_MoveNorth;
-    private readonly InputAction m_Player_Newaction;
+    private readonly InputAction m_Player_MoveSouth;
+    private readonly InputAction m_Player_MoveEast;
+    private readonly InputAction m_Player_MoveWest;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
         public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Select => m_Wrapper.m_Player_Select;
         public InputAction @MoveNorth => m_Wrapper.m_Player_MoveNorth;
-        public InputAction @Newaction => m_Wrapper.m_Player_Newaction;
+        public InputAction @MoveSouth => m_Wrapper.m_Player_MoveSouth;
+        public InputAction @MoveEast => m_Wrapper.m_Player_MoveEast;
+        public InputAction @MoveWest => m_Wrapper.m_Player_MoveWest;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -178,9 +222,15 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @MoveNorth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveNorth;
                 @MoveNorth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveNorth;
                 @MoveNorth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveNorth;
-                @Newaction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNewaction;
+                @MoveSouth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveSouth;
+                @MoveSouth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveSouth;
+                @MoveSouth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveSouth;
+                @MoveEast.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveEast;
+                @MoveEast.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveEast;
+                @MoveEast.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveEast;
+                @MoveWest.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveWest;
+                @MoveWest.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveWest;
+                @MoveWest.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveWest;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -191,9 +241,15 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @MoveNorth.started += instance.OnMoveNorth;
                 @MoveNorth.performed += instance.OnMoveNorth;
                 @MoveNorth.canceled += instance.OnMoveNorth;
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
+                @MoveSouth.started += instance.OnMoveSouth;
+                @MoveSouth.performed += instance.OnMoveSouth;
+                @MoveSouth.canceled += instance.OnMoveSouth;
+                @MoveEast.started += instance.OnMoveEast;
+                @MoveEast.performed += instance.OnMoveEast;
+                @MoveEast.canceled += instance.OnMoveEast;
+                @MoveWest.started += instance.OnMoveWest;
+                @MoveWest.performed += instance.OnMoveWest;
+                @MoveWest.canceled += instance.OnMoveWest;
             }
         }
     }
@@ -211,6 +267,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     {
         void OnSelect(InputAction.CallbackContext context);
         void OnMoveNorth(InputAction.CallbackContext context);
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnMoveSouth(InputAction.CallbackContext context);
+        void OnMoveEast(InputAction.CallbackContext context);
+        void OnMoveWest(InputAction.CallbackContext context);
     }
 }

@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     {
         Unit newUnit = Instantiate(unit);
         newUnit.game = this;
+        newUnit.tile = currentGameBoard.board[player.StartX, player.StartY];
         // Tell unit which position it holds
         newUnit.position = currentGameBoard.board[player.StartX, player.StartY].GetComponent<Transform>().position;
         // Move unit to its position
@@ -119,7 +120,7 @@ public class GameManager : MonoBehaviour
             {
                 Tile currentTile = currentGameBoard.board[i, j];
 
-                Debug.Log(i + ", " + j);
+                // Debug.Log(i + ", " + j);
                 // Debug.Log(currentGameBoard.board.GetLength(0) + ", " + currentGameBoard.board.GetLength(1));
 
 
@@ -149,7 +150,7 @@ public class GameManager : MonoBehaviour
         currentGameBoard.board[1, 4].GetComponent<SpriteRenderer>().color = Color.blue;
         currentGameBoard.board[11, 4].modifier.modifierName = "GOAL";
         currentGameBoard.board[11, 4].GetComponent<SpriteRenderer>().color = Color.red;
-        
+
     }
 
     // Update is called once per frame
@@ -219,7 +220,7 @@ public class GameManager : MonoBehaviour
 
         foreach (Unit currentUnit in movingUnits)
         {
-            
+
         }
         if (selectedUnit != null)
         {
@@ -231,52 +232,29 @@ public class GameManager : MonoBehaviour
 
             if (selectedUnit.isMoving == false)
             {
-                // if (!selectedUnit.move(horizontalMovement, verticalMovement, currentTile))
-                // {
-                //     // blink
-                // }
-                if ((currentTile.easternTile != null) && (currentTile.easternTile.isTraversable == true) && (horizontalMovement > 0))
+                // Blink selected unit
+                Color tmp = selectedUnit.GetComponent<SpriteRenderer>().color;
+                if (blinkingOff)
                 {
-                    move(currentTile.easternTile, "E");
-                }
-                else if ((currentTile.westernTile != null) && (currentTile.westernTile.isTraversable == true) && (horizontalMovement < 0))
-                {
-                    move(currentTile.westernTile, "W");
-                }
-                else if ((currentTile.northernTile != null) && (currentTile.northernTile.isTraversable == true) && (verticalMovement > 0))
-                {
-                    move(currentTile.northernTile, "N");
-                }
-                else if ((currentTile.southernTile != null) && (currentTile.southernTile.isTraversable == true) && (verticalMovement < 0))
-                {
-                    move(currentTile.southernTile, "S");
+                    tmp.a *= 0.98f;
+
+                    if (tmp.a < 0.5f)
+                    {
+                        blinkingOff = false;
+                    }
                 }
                 else
                 {
-                    // Blink selected unit
-                    Color tmp = selectedUnit.GetComponent<SpriteRenderer>().color;
-                    if (blinkingOff)
-                    {
-                        tmp.a *= 0.98f;
+                    tmp.a *= 1.02f;
 
-                        if (tmp.a < 0.5f)
-                        {
-                            blinkingOff = false;
-                        }
-                    }
-                    else
+                    if (tmp.a > 0.98f)
                     {
-                        tmp.a *= 1.02f;
-
-                        if (tmp.a > 0.98f)
-                        {
-                            blinkingOff = true;
-                        }
+                        blinkingOff = true;
                     }
-                    selectedUnit.GetComponent<SpriteRenderer>().color = tmp;
                 }
+                selectedUnit.GetComponent<SpriteRenderer>().color = tmp;
             }
-            else
+            else // If selected unit is moving
             {
                 if (currentTile.modifier.modifierName.Equals("GOAL"))
                 {
@@ -285,7 +263,8 @@ public class GameManager : MonoBehaviour
                         Destroy(selectedUnit.GetComponent<SpriteRenderer>());
                         Destroy(selectedUnit.gameObject);
                         ((Player)players[0]).score += 1;
-                        movingUnits.Remove(selectedUnit);
+                        // movingUnits.Remove(selectedUnit);
+                        selectedUnit = null;
                     }
                 }
                 else if (currentTile.modifier.modifierName.Equals("START"))
@@ -295,33 +274,54 @@ public class GameManager : MonoBehaviour
                         Destroy(selectedUnit.GetComponent<SpriteRenderer>());
                         Destroy(selectedUnit.gameObject);
                         ((Player)players[1]).score += 1;
-                        movingUnits.Remove(selectedUnit);
+                        // movingUnits.Remove(selectedUnit);
+                        selectedUnit = null;
+
                     }
                 }
 
-                if ((selectedUnit.direction.Equals("E")) && ((currentTile.easternTile != null) && (currentTile.easternTile.isTraversable)))
+                if ((selectedUnit.direction.Equals("E")) && selectedUnit.unitCanMove(currentTile.easternTile))
                 {
-                    move(currentTile.easternTile, "E");
-                    // movingUnits.Add(selectedUnit);
+                    selectedUnit.move(currentTile.easternTile, "E");
                 }
-                else if ((selectedUnit.direction.Equals("W")) && ((currentTile.westernTile != null) && (currentTile.westernTile.isTraversable)))
+                else if ((selectedUnit.direction.Equals("W")) && selectedUnit.unitCanMove(currentTile.westernTile))
                 {
-                    move(currentTile.westernTile, "W");
+                    selectedUnit.move(currentTile.westernTile, "W");
                 }
-                else if ((selectedUnit.direction.Equals("N")) && ((currentTile.northernTile != null) && (currentTile.northernTile.isTraversable)))
+                else if ((selectedUnit.direction.Equals("N")) && selectedUnit.unitCanMove(currentTile.northernTile))
                 {
-                    move(currentTile.northernTile, "N");
+                    selectedUnit.move(currentTile.northernTile, "N");
                 }
-                else if ((selectedUnit.direction.Equals("S")) && ((currentTile.southernTile != null) && (currentTile.southernTile.isTraversable)))
+                else if ((selectedUnit.direction.Equals("S")) && selectedUnit.unitCanMove(currentTile.southernTile))
                 {
-                    move(currentTile.southernTile, "S");
+                    selectedUnit.move(currentTile.southernTile, "S");
                 }
                 else
                 {
                     selectedUnit.direction = "";
                     selectedUnit.isMoving = false;
                     currentTile.isTraversable = false;
+
                 }
+
+                // if ((selectedUnit.direction.Equals("E")) && ((currentTile.easternTile != null) && (currentTile.easternTile.isTraversable)))
+                // {
+                //     selectedUnit.move(currentTile.easternTile, "E");
+                //     // movingUnits.Add(selectedUnit);
+                // }
+                // else if ((selectedUnit.direction.Equals("W")) && ((currentTile.westernTile != null) && (currentTile.westernTile.isTraversable)))
+                // {
+                //     selectedUnit.move(currentTile.westernTile, "W");
+                // }
+                // else if ((selectedUnit.direction.Equals("N")) && ((currentTile.northernTile != null) && (currentTile.northernTile.isTraversable)))
+                // {
+                //     selectedUnit.move(currentTile.northernTile, "N");
+                // }
+                // else if ((selectedUnit.direction.Equals("S")) && ((currentTile.southernTile != null) && (currentTile.southernTile.isTraversable)))
+                // {
+                //     selectedUnit.move(currentTile.southernTile, "S");
+                // }
+
             }
         }
 
@@ -331,10 +331,11 @@ public class GameManager : MonoBehaviour
     {
         selectedUnit.isMoving = true;
         selectedUnit.direction = direction;
-        currentTile.unit = null;
         selectedUnit.position = tileToMoveTo.GetComponent<Transform>().position;
         selectedUnit.GetComponent<Transform>().position = selectedUnit.position;
+        selectedUnit.tile = tileToMoveTo;
         tileToMoveTo.unit = selectedUnit;
+        currentTile.unit = null;
         currentTile.isTraversable = true;
         if (!movingUnits.Contains(selectedUnit))
         {

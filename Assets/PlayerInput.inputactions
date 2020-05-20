@@ -22,10 +22,26 @@
                     "interactions": ""
                 },
                 {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "abc279d5-2736-4d90-a3ba-8f61e3699666",
-                    "expectedControlType": "Button",
+                    "name": "MoveSouth",
+                    "type": "Value",
+                    "id": "9e266991-b2f0-48df-a4f8-494487f40e8c",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MoveEast",
+                    "type": "Value",
+                    "id": "7db91d9b-d779-43e1-a68e-334700c120e4",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MoveWest",
+                    "type": "Value",
+                    "id": "3a4b3f0b-157a-40ee-bae9-f51e273326b6",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 }
@@ -55,12 +71,34 @@
                 },
                 {
                     "name": "",
-                    "id": "24ce3f09-172f-4f1b-a2a7-bfaefdbedb6b",
-                    "path": "",
+                    "id": "aa253004-be52-4c83-9223-de14e9850649",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "New action",
+                    "groups": "Keyboard and Mouse",
+                    "action": "MoveSouth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3fbb3c4c-41e5-4f9f-a0cc-bbd454a77c2a",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "MoveEast",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b28ca71-2b74-419c-8a80-21d43445ef28",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "MoveWest",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
