@@ -8,6 +8,7 @@ public class PlayerScoreDisplay : MonoBehaviour
     public GameManager game;
     public Text scoreText;
 
+
     // Update is called once per frame
     void Update()
     {

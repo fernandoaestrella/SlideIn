@@ -14,4 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestGameWorld.unity
     guid: c430c68868d189d47a0b9d93549bb17f
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: c97122b91e10ce9418cf94729a4005b0,
+      type: 2}
