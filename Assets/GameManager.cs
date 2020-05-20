@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     Tile westernTile;
     Tile northernTile;
     Tile southernTile;
-    bool blinkingOff;
+
     public float startTime;
     public float elapsedTime;
     public float matchDuration;
@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
         Unit newUnit = Instantiate(unit);
         newUnit.game = this;
         newUnit.tile = currentGameBoard.board[player.StartX, player.StartY];
+        newUnit.player = player;
         // Tell unit which position it holds
         newUnit.position = currentGameBoard.board[player.StartX, player.StartY].GetComponent<Transform>().position;
         // Move unit to its position
@@ -227,119 +228,54 @@ public class GameManager : MonoBehaviour
             //((Player)players[0]).team.Add(createUnit());
             currentTile = currentGameBoard.board[(int)selectedUnit.position.x, (int)selectedUnit.position.y];
 
-            float horizontalMovement = Input.GetAxis("Horizontal");
-            float verticalMovement = Input.GetAxis("Vertical");
+            // float horizontalMovement = Input.GetAxis("Horizontal");
+            // float verticalMovement = Input.GetAxis("Vertical");
 
             if (selectedUnit.isMoving == false)
             {
-                // Blink selected unit
-                Color tmp = selectedUnit.GetComponent<SpriteRenderer>().color;
-                if (blinkingOff)
-                {
-                    tmp.a *= 0.98f;
-
-                    if (tmp.a < 0.5f)
-                    {
-                        blinkingOff = false;
-                    }
-                }
-                else
-                {
-                    tmp.a *= 1.02f;
-
-                    if (tmp.a > 0.98f)
-                    {
-                        blinkingOff = true;
-                    }
-                }
-                selectedUnit.GetComponent<SpriteRenderer>().color = tmp;
+                selectedUnit.blink();
             }
             else // If selected unit is moving
             {
-                if (currentTile.modifier.modifierName.Equals("GOAL"))
-                {
-                    if (((Player)players[0]).team.Contains(selectedUnit))
-                    {
-                        Destroy(selectedUnit.GetComponent<SpriteRenderer>());
-                        Destroy(selectedUnit.gameObject);
-                        ((Player)players[0]).score += 1;
-                        // movingUnits.Remove(selectedUnit);
-                        selectedUnit = null;
-                    }
-                }
-                else if (currentTile.modifier.modifierName.Equals("START"))
-                {
-                    if (((Player)players[1]).team.Contains(selectedUnit))
-                    {
-                        Destroy(selectedUnit.GetComponent<SpriteRenderer>());
-                        Destroy(selectedUnit.gameObject);
-                        ((Player)players[1]).score += 1;
-                        // movingUnits.Remove(selectedUnit);
-                        selectedUnit = null;
+                // if (currentTile.modifier.modifierName.Equals("GOAL"))
+                // {
+                //     if (((Player)players[0]).team.Contains(selectedUnit))
+                //     {
+                //         selectedUnit.remove();
+                //     }
+                // }
+                // else if (currentTile.modifier.modifierName.Equals("START"))
+                // {
+                //     if (((Player)players[1]).team.Contains(selectedUnit))
+                //     {
+                //         selectedUnit.remove();
+                //     }
+                // }
 
-                    }
-                }
-
-                if ((selectedUnit.direction.Equals("E")) && selectedUnit.unitCanMove(currentTile.easternTile))
-                {
-                    selectedUnit.move(currentTile.easternTile, "E");
-                }
-                else if ((selectedUnit.direction.Equals("W")) && selectedUnit.unitCanMove(currentTile.westernTile))
-                {
-                    selectedUnit.move(currentTile.westernTile, "W");
-                }
-                else if ((selectedUnit.direction.Equals("N")) && selectedUnit.unitCanMove(currentTile.northernTile))
-                {
-                    selectedUnit.move(currentTile.northernTile, "N");
-                }
-                else if ((selectedUnit.direction.Equals("S")) && selectedUnit.unitCanMove(currentTile.southernTile))
-                {
-                    selectedUnit.move(currentTile.southernTile, "S");
-                }
-                else
-                {
-                    selectedUnit.direction = "";
-                    selectedUnit.isMoving = false;
-                    currentTile.isTraversable = false;
-
-                }
-
-                // if ((selectedUnit.direction.Equals("E")) && ((currentTile.easternTile != null) && (currentTile.easternTile.isTraversable)))
+                // if ((selectedUnit.direction.Equals("E")) && selectedUnit.unitCanMove(currentTile.easternTile))
                 // {
                 //     selectedUnit.move(currentTile.easternTile, "E");
-                //     // movingUnits.Add(selectedUnit);
                 // }
-                // else if ((selectedUnit.direction.Equals("W")) && ((currentTile.westernTile != null) && (currentTile.westernTile.isTraversable)))
+                // else if ((selectedUnit.direction.Equals("W")) && selectedUnit.unitCanMove(currentTile.westernTile))
                 // {
                 //     selectedUnit.move(currentTile.westernTile, "W");
                 // }
-                // else if ((selectedUnit.direction.Equals("N")) && ((currentTile.northernTile != null) && (currentTile.northernTile.isTraversable)))
+                // else if ((selectedUnit.direction.Equals("N")) && selectedUnit.unitCanMove(currentTile.northernTile))
                 // {
                 //     selectedUnit.move(currentTile.northernTile, "N");
                 // }
-                // else if ((selectedUnit.direction.Equals("S")) && ((currentTile.southernTile != null) && (currentTile.southernTile.isTraversable)))
+                // else if ((selectedUnit.direction.Equals("S")) && selectedUnit.unitCanMove(currentTile.southernTile))
                 // {
                 //     selectedUnit.move(currentTile.southernTile, "S");
                 // }
-
+                // else
+                // {
+                //     // Stop moving
+                //     selectedUnit.direction = "";
+                //     selectedUnit.isMoving = false;
+                //     currentTile.isTraversable = false;
+                // }
             }
-        }
-
-    }
-
-    void move(Tile tileToMoveTo, string direction)
-    {
-        selectedUnit.isMoving = true;
-        selectedUnit.direction = direction;
-        selectedUnit.position = tileToMoveTo.GetComponent<Transform>().position;
-        selectedUnit.GetComponent<Transform>().position = selectedUnit.position;
-        selectedUnit.tile = tileToMoveTo;
-        tileToMoveTo.unit = selectedUnit;
-        currentTile.unit = null;
-        currentTile.isTraversable = true;
-        if (!movingUnits.Contains(selectedUnit))
-        {
-            // Debug.Log("contained!");
         }
     }
 }
