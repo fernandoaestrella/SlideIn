@@ -76,19 +76,20 @@ public class Unit : MonoBehaviour
 
     public void move(Tile tileToMoveTo, string direction)
     {
-        tile.unit = null;
-        tile.isTraversable = true;
         this.isMoving = true;
         this.direction = direction;
+        place(tileToMoveTo);
+    }
+
+    public void place(Tile tileToMoveTo)
+    {
+        tile.unit = null;
+        tile.isTraversable = true;
         this.position = tileToMoveTo.GetComponent<Transform>().position;
         this.GetComponent<Transform>().position = this.position;
         this.tile = tileToMoveTo;
-        this.tile.unit = this;
-
-        if (!game.movingUnits.Contains(this))
-        {
-            // Debug.Log("contained!");
-        }
+        tileToMoveTo.unit = this;
+        tileToMoveTo.isTraversable = false;
     }
 
     public void blink()
@@ -121,51 +122,128 @@ public class Unit : MonoBehaviour
         Destroy(this.GetComponent<SpriteRenderer>());
         Destroy(this.gameObject);
         this.player.score += 1;
-        // movingUnits.Remove(selectedUnit);
         game.selectedUnit = null;
+        tile.isTraversable = true;
+    }
+
+    void playChecker()
+    {
+        switch (direction)
+        {
+            case "N":
+                if (tile.northernTile != null && tile.northernTile.unit != null && tile.northernTile.northernTile != null && tile.northernTile.northernTile.unit != null && tile.northernTile.northernTile.northernTile != null && tile.northernTile.northernTile.northernTile.unit != null && tile.northernTile.northernTile.northernTile.northernTile != null)
+                {
+                    if (tile.northernTile.unit.player.startTile.Equals(player.startTile) && tile.northernTile.northernTile.unit.player.startTile.Equals(player.startTile) && !tile.northernTile.northernTile.northernTile.unit.player.startTile.Equals(player.startTile))
+                    {
+                        tile.northernTile.northernTile.northernTile.unit.remove();
+                    }
+                }
+                else if (tile.northernTile != null && tile.northernTile.unit != null && tile.northernTile.northernTile != null && tile.northernTile.northernTile.unit != null && tile.northernTile.northernTile.northernTile != null)
+                {
+                    if (tile.northernTile.unit.player.startTile.Equals(player.startTile) && !tile.northernTile.northernTile.unit.player.startTile.Equals(player.startTile) && tile.northernTile.northernTile.northernTile.isTraversable)
+                    {
+                        tile.northernTile.northernTile.unit.place(tile.northernTile.northernTile.northernTile);
+                    }
+                }
+                break;
+            case "S":
+                if (tile.southernTile != null && tile.southernTile.unit != null && tile.southernTile.southernTile != null && tile.southernTile.southernTile.unit != null && tile.southernTile.southernTile.southernTile != null && tile.southernTile.southernTile.southernTile.unit != null && tile.southernTile.southernTile.southernTile.southernTile != null)
+                {
+                    if (tile.southernTile.unit.player.startTile.Equals(player.startTile) && tile.southernTile.southernTile.unit.player.startTile.Equals(player.startTile) && !tile.southernTile.southernTile.southernTile.unit.player.startTile.Equals(player.startTile))
+                    {
+                        tile.southernTile.southernTile.southernTile.unit.remove();
+                    }
+                }
+                else if (tile.southernTile != null && tile.southernTile.unit != null && tile.southernTile.southernTile != null && tile.southernTile.southernTile.unit != null && tile.southernTile.southernTile.southernTile != null)
+                {
+                    if (tile.southernTile.unit.player.startTile.Equals(player.startTile) && !tile.southernTile.southernTile.unit.player.startTile.Equals(player.startTile) && tile.southernTile.southernTile.southernTile.isTraversable)
+                    {
+                        tile.southernTile.southernTile.unit.place(tile.southernTile.southernTile.southernTile);
+                    }
+                }
+                break;
+            case "E":
+                if (tile.easternTile != null && tile.easternTile.unit != null && tile.easternTile.easternTile != null && tile.easternTile.easternTile.unit != null && tile.easternTile.easternTile.easternTile != null && tile.easternTile.easternTile.easternTile.unit != null && tile.easternTile.easternTile.easternTile.easternTile != null)
+                {
+                    if (tile.easternTile.unit.player.startTile.Equals(player.startTile) && tile.easternTile.easternTile.unit.player.startTile.Equals(player.startTile) && !tile.easternTile.easternTile.easternTile.unit.player.startTile.Equals(player.startTile))
+                    {
+                        tile.easternTile.easternTile.easternTile.unit.remove();
+                    }
+                }
+                else if (tile.easternTile != null && tile.easternTile.unit != null && tile.easternTile.easternTile != null && tile.easternTile.easternTile.unit != null && tile.easternTile.easternTile.easternTile != null)
+                {
+                    if (tile.easternTile.unit.player.startTile.Equals(player.startTile) && !tile.easternTile.easternTile.unit.player.startTile.Equals(player.startTile) && tile.easternTile.easternTile.easternTile.isTraversable)
+                    {
+                        tile.easternTile.easternTile.unit.place(tile.easternTile.easternTile.easternTile);
+                    }
+                }
+                break;
+            case "W":
+                if (tile.westernTile != null && tile.westernTile.unit != null && tile.westernTile.westernTile != null && tile.westernTile.westernTile.unit != null && tile.westernTile.westernTile.westernTile != null && tile.westernTile.westernTile.westernTile.unit != null && tile.westernTile.westernTile.westernTile.westernTile != null)
+                {
+                    if (tile.westernTile.unit.player.startTile.Equals(player.startTile) && tile.westernTile.westernTile.unit.player.startTile.Equals(player.startTile) && !tile.westernTile.westernTile.westernTile.unit.player.startTile.Equals(player.startTile))
+                    {
+                        tile.westernTile.westernTile.westernTile.unit.remove();
+                    }
+                }
+                else if (tile.westernTile != null && tile.westernTile.unit != null && tile.westernTile.westernTile != null && tile.westernTile.westernTile.unit != null && tile.westernTile.westernTile.westernTile  != null)
+                {
+                    if (tile.westernTile.unit.player.startTile.Equals(player.startTile) && !tile.westernTile.westernTile.unit.player.startTile.Equals(player.startTile) && tile.westernTile.westernTile.westernTile.isTraversable)
+                    {
+                        tile.westernTile.westernTile.unit.place(tile.westernTile.westernTile.westernTile);
+                    }
+                }
+                break;
+        }
+
+
     }
 
     void Update()
     {
         if (isMoving)
         {
-            if (tile.modifier.modifierName.Equals("GOAL"))
+            if (tile.Equals(player.goalTile))
             {
-                if (((Player) game.players[0]).Equals(this.player))
-                {
-                    remove();
-                }
-            }
-            else if (tile.modifier.modifierName.Equals("START"))
-            {
-                if (((Player) game.players[1]).Equals(this.player))
-                {
-                    remove();
-                }
-            }
-
-            if ((direction.Equals("E")) && unitCanMove(tile.easternTile))
-            {
-                move(tile.easternTile, "E");
-            }
-            else if ((direction.Equals("W")) && unitCanMove(tile.westernTile))
-            {
-                move(tile.westernTile, "W");
-            }
-            else if ((direction.Equals("N")) && unitCanMove(tile.northernTile))
-            {
-                move(tile.northernTile, "N");
-            }
-            else if ((direction.Equals("S")) && unitCanMove(tile.southernTile))
-            {
-                move(tile.southernTile, "S");
+                remove();
             }
             else
             {
-                // Stop moving
-                direction = "";
-                isMoving = false;
-                tile.isTraversable = false;
+                if ((direction.Equals("E")) && unitCanMove(tile.easternTile))
+                {
+                    move(tile.easternTile, "E");
+                }
+                else if ((direction.Equals("W")) && unitCanMove(tile.westernTile))
+                {
+                    move(tile.westernTile, "W");
+                }
+                else if ((direction.Equals("N")) && unitCanMove(tile.northernTile))
+                {
+                    move(tile.northernTile, "N");
+                }
+                else if ((direction.Equals("S")) && unitCanMove(tile.southernTile))
+                {
+                    move(tile.southernTile, "S");
+                }
+                else
+                {
+                    // Stop moving
+                    if (!direction.Equals(""))
+                    {
+                        playChecker();
+                    }
+                    direction = "";
+                    isMoving = false;
+                    tile.isTraversable = false;
+                }
+            }
+
+        }
+        else
+        {
+            if (this.Equals(game.selectedUnit))
+            {
+                blink();
             }
         }
     }

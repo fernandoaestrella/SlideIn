@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
+
 public class GameManager : MonoBehaviour
 {
     public Camera mainCamera;
@@ -13,8 +14,6 @@ public class GameManager : MonoBehaviour
     public Unit unit;
     public Unit selectedUnit;
     public ArrayList selectedUnits;
-    public ArrayList movingUnits;
-
     public ArrayList players;
     Tile currentTile;
     Tile easternTile;
@@ -40,7 +39,6 @@ public class GameManager : MonoBehaviour
         players.Insert(0, new Player());
         players.Insert(1, new Player());
 
-        movingUnits = new ArrayList(16);
         // Set team size
         ((Player)players[0]).team = new ArrayList(16); // Initial size set to avoid some overflow cycles
         ((Player)players[1]).team = new ArrayList(16); // Initial size set to avoid some overflow cycles
@@ -48,9 +46,15 @@ public class GameManager : MonoBehaviour
         // Set player 1 starting position
         ((Player)players[0]).StartX = 1;
         ((Player)players[0]).StartY = 4;
+        ((Player)players[0]).startTile = this.currentGameBoard.board[1, 4];
+        ((Player)players[0]).goalTile = this.currentGameBoard.board[11, 4];
+
 
         ((Player)players[1]).StartX = 11;
         ((Player)players[1]).StartY = 4;
+        ((Player)players[1]).startTile = this.currentGameBoard.board[11, 4];
+        ((Player)players[1]).goalTile = this.currentGameBoard.board[1, 4];
+
 
         // Set team colors
         ((Player)players[0]).unitColor = new Color(0.5f, 0.98f, 0.89f, 1);
@@ -62,7 +66,8 @@ public class GameManager : MonoBehaviour
         Unit newUnit = Instantiate(unit);
         newUnit.game = this;
         newUnit.tile = currentGameBoard.board[player.StartX, player.StartY];
-        newUnit.player = player;
+        newUnit.player = (Player)player;
+        newUnit.isMoving = false;
         // Tell unit which position it holds
         newUnit.position = currentGameBoard.board[player.StartX, player.StartY].GetComponent<Transform>().position;
         // Move unit to its position
@@ -100,13 +105,13 @@ public class GameManager : MonoBehaviour
                     currentTile.GetComponent<SpriteRenderer>().color = Color.gray;
                 }
 
-                // Make top and bottom row untraversable
-                if ((j == 0) || (j == currentGameBoard.board.GetLength(1) - 1))
-                {
-                    currentTile.modifier.modifierName = "UNPASSABLE";
-                    currentTile.isTraversable = false;
-                    currentTile.GetComponent<SpriteRenderer>().color = Color.black;
-                }
+                // // Make top and bottom row untraversable
+                // if ((j == 0) || (j == currentGameBoard.board.GetLength(1) - 1))
+                // {
+                //     currentTile.modifier.modifierName = "UNPASSABLE";
+                //     currentTile.isTraversable = false;
+                //     currentTile.GetComponent<SpriteRenderer>().color = Color.black;
+                // }
 
                 // Save the tile in the gameboard
                 currentGameBoard.board[i, j] = currentTile;
@@ -114,6 +119,8 @@ public class GameManager : MonoBehaviour
                 // Debug.Log(i + ", " + j);
             }
         }
+
+
 
         for (int i = 0; i < currentGameBoard.board.GetLength(0); i++)
         {
@@ -152,6 +159,26 @@ public class GameManager : MonoBehaviour
         currentGameBoard.board[11, 4].modifier.modifierName = "GOAL";
         currentGameBoard.board[11, 4].GetComponent<SpriteRenderer>().color = Color.red;
 
+        for (int i = 0; i < 30; i++)
+        {
+            bool found = false;
+
+            while (!found)
+            {
+                int randomX = UnityEngine.Random.Range(0, currentGameBoard.board.GetLength(0));
+                int randomY = UnityEngine.Random.Range(0, currentGameBoard.board.GetLength(1));
+
+                Tile currentTile = currentGameBoard.board[randomX, randomY];
+                if (currentTile.modifier.modifierName != "START" && currentTile.modifier.modifierName != "GOAL" && currentTile.isTraversable)
+                {
+                    currentTile.modifier.modifierName = "UNPASSABLE";
+                    currentTile.isTraversable = false;
+                    currentTile.GetComponent<SpriteRenderer>().color = Color.black;
+                    found = true;
+                }
+            }
+
+        }
     }
 
     // Update is called once per frame
@@ -218,64 +245,7 @@ public class GameManager : MonoBehaviour
 
             // What if you hit outside the gameboard?
         }
-
-        foreach (Unit currentUnit in movingUnits)
-        {
-
-        }
-        if (selectedUnit != null)
-        {
-            //((Player)players[0]).team.Add(createUnit());
-            currentTile = currentGameBoard.board[(int)selectedUnit.position.x, (int)selectedUnit.position.y];
-
-            // float horizontalMovement = Input.GetAxis("Horizontal");
-            // float verticalMovement = Input.GetAxis("Vertical");
-
-            if (selectedUnit.isMoving == false)
-            {
-                selectedUnit.blink();
-            }
-            else // If selected unit is moving
-            {
-                // if (currentTile.modifier.modifierName.Equals("GOAL"))
-                // {
-                //     if (((Player)players[0]).team.Contains(selectedUnit))
-                //     {
-                //         selectedUnit.remove();
-                //     }
-                // }
-                // else if (currentTile.modifier.modifierName.Equals("START"))
-                // {
-                //     if (((Player)players[1]).team.Contains(selectedUnit))
-                //     {
-                //         selectedUnit.remove();
-                //     }
-                // }
-
-                // if ((selectedUnit.direction.Equals("E")) && selectedUnit.unitCanMove(currentTile.easternTile))
-                // {
-                //     selectedUnit.move(currentTile.easternTile, "E");
-                // }
-                // else if ((selectedUnit.direction.Equals("W")) && selectedUnit.unitCanMove(currentTile.westernTile))
-                // {
-                //     selectedUnit.move(currentTile.westernTile, "W");
-                // }
-                // else if ((selectedUnit.direction.Equals("N")) && selectedUnit.unitCanMove(currentTile.northernTile))
-                // {
-                //     selectedUnit.move(currentTile.northernTile, "N");
-                // }
-                // else if ((selectedUnit.direction.Equals("S")) && selectedUnit.unitCanMove(currentTile.southernTile))
-                // {
-                //     selectedUnit.move(currentTile.southernTile, "S");
-                // }
-                // else
-                // {
-                //     // Stop moving
-                //     selectedUnit.direction = "";
-                //     selectedUnit.isMoving = false;
-                //     currentTile.isTraversable = false;
-                // }
-            }
-        }
+        // float horizontalMovement = Input.GetAxis("Horizontal");
+        // float verticalMovement = Input.GetAxis("Vertical");
     }
 }

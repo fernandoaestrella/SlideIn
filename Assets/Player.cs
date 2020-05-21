@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     private int goalX;
     private int goalY;
     public Color unitColor;
+    public Tile startTile;
+    public Tile goalTile;
 
     public int GoalX { get => goalX; set => goalX = value; }
     public int GoalY { get => goalY; set => goalY = value; }
