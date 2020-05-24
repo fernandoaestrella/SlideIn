@@ -10,7 +10,11 @@
     "com.unity.ide.visualstudio": "1.0.11",
     "com.unity.ide.vscode": "1.2.0",
     "com.unity.inputsystem": "1.0.0",
+<<<<<<< HEAD
     "com.unity.multiplayer-hlapi": "1.0.6",
+=======
+    "com.unity.multiplayer-hlapi": "1.0.4",
+>>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
     "com.unity.purchasing": "2.0.6",
     "com.unity.test-framework": "1.1.13",
     "com.unity.textmeshpro": "2.0.1",

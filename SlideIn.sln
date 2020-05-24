@@ -1,8 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+<<<<<<< HEAD
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror", "Mirror.csproj", "{1DCE0DD0-44D8-777A-6AA3-51D4BED49B6C}"
 EndProject
+=======
+>>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{E97AD3E1-F64B-EE47-97AB-61EB04A9A624}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.Components", "Mirror.Components.csproj", "{54A67FA1-BFD3-C445-6E99-1CC436C13389}"
