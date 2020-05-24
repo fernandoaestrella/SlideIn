@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-
+//Debug.Log(Time.deltaTime);
 public class GameManager : MonoBehaviour
 {
     public Camera mainCamera;
@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public Unit selectedUnit;
     public ArrayList selectedUnits;
     public ArrayList players;
+    public Player player;
     Tile currentTile;
     Tile easternTile;
     Tile westernTile;
@@ -31,13 +32,24 @@ public class GameManager : MonoBehaviour
     {
         startTime = Time.time;
         elapsedTime = 0f;
-        matchDuration = 60f;
+        matchDuration = 300f;
 
         createBoard();
 
         players = new ArrayList(16); // Initial size set to avoid some overflow cycles (wherein inserting an element in the array exceeds its capacity and activates a script that creates a new, bigger array)
-        players.Insert(0, new Player());
-        players.Insert(1, new Player());
+        // players.Insert(0, new Player(this));
+        // players.Insert(1, new Player(this));
+        // Player p = new Player(this);
+        // GameObject.Find("Player").GetComponent<Player>();
+        Player p =  Instantiate(player);
+        p.name = "P1";
+        p.PlayerName = "P1";
+        players.Insert(0, p);
+        
+        p =  Instantiate(player);
+        p.name = "P2";
+        p.PlayerName = "P2";
+        players.Insert(1, p);
 
         // Set team size
         ((Player)players[0]).team = new ArrayList(16); // Initial size set to avoid some overflow cycles
@@ -159,7 +171,8 @@ public class GameManager : MonoBehaviour
         currentGameBoard.board[11, 4].modifier.modifierName = "GOAL";
         currentGameBoard.board[11, 4].GetComponent<SpriteRenderer>().color = Color.red;
 
-        for (int i = 0; i < 30; i++)
+        // Random placement of untraversable blocks
+        for (int i = 0; i < 22; i++)
         {
             bool found = false;
 
@@ -201,14 +214,6 @@ public class GameManager : MonoBehaviour
             //Does the ray intersect any objects which are in the player layer.
             if ((hit.transform != null) && (hit.transform.gameObject.name.Equals("Unit(Clone)")))
             {
-                // If there was a unit selected previously
-                if (selectedUnit != null)
-                {
-                    Color tmp = selectedUnit.GetComponent<SpriteRenderer>().color;
-                    tmp.a = 1;
-                    selectedUnit.GetComponent<SpriteRenderer>().color = tmp;
-                }
-                selectedUnit = hit.transform.gameObject.GetComponent<Unit>();
             }
             else
             {
@@ -217,12 +222,15 @@ public class GameManager : MonoBehaviour
                 // Does the ray intersect any tile in the game board layer.
                 if (hit.transform.gameObject.name.Equals("Tile(Clone)"))
                 {
-                    if (selectedUnit != null)
+                    foreach (Player player in players)
                     {
-                        Color tmp = selectedUnit.GetComponent<SpriteRenderer>().color;
-                        tmp.a = 1;
-                        selectedUnit.GetComponent<SpriteRenderer>().color = tmp;
-                        selectedUnit = null;
+                        foreach (Unit unit in player.team)
+                        {
+                            if (unit.isSelected == true)
+                            {
+                                unit.unselect();
+                            }
+                        }
                     }
 
                     Tile selectedTile = hit.transform.gameObject.GetComponent<Tile>();

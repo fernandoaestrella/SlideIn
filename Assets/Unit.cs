@@ -10,17 +10,19 @@ public class Unit : MonoBehaviour
     public Vector3 position;
     public GameManager game;
     public Tile tile;
-    bool blinkingOff = true;
+    bool fadingOff = true;
     public Player player;
+    public bool isSelected = false;
+    public bool isBlinking = false;
 
     void OnMouseUpAsButton()
     {
-        // game.selectedUnit = this;
+        isSelected = true;
     }
 
     Boolean moveCheck(Tile tileToMoveTo)
     {
-        if ((isMoving == false) && game.selectedUnit.Equals(this) && unitCanMove(tileToMoveTo))
+        if ((isMoving == false) && isSelected && unitCanMove(tileToMoveTo))
         {
             return true;
         }
@@ -92,30 +94,60 @@ public class Unit : MonoBehaviour
         tileToMoveTo.isTraversable = false;
     }
 
-    public void blink()
+
+    public IEnumerator Blink()
     {
-        // Blink selected unit
-        Color tmp = this.GetComponent<SpriteRenderer>().color;
-        if (blinkingOff)
+        while (true)
         {
-            tmp.a *= 0.98f;
-
-            if (tmp.a < 0.5f)
+            yield return new WaitForSeconds(0.0053f);
+            // Blink selected unit
+            Color tmp = this.GetComponent<SpriteRenderer>().color;
+            if (fadingOff)
             {
-                blinkingOff = false;
-            }
-        }
-        else
-        {
-            tmp.a *= 1.02f;
+                tmp.a *= 0.98f;
 
-            if (tmp.a > 0.98f)
-            {
-                blinkingOff = true;
+                if (tmp.a < 0.5f)
+                {
+                    fadingOff = false;
+                }
             }
+            else
+            {
+                tmp.a *= 1.02f;
+
+                if (tmp.a > 0.98f)
+                {
+                    fadingOff = true;
+                }
+            }
+            this.GetComponent<SpriteRenderer>().color = tmp;
         }
-        this.GetComponent<SpriteRenderer>().color = tmp;
     }
+
+    // public void blink()
+    // {
+    //     // Blink selected unit
+    //     Color tmp = this.GetComponent<SpriteRenderer>().color;
+    //     if (blinkingOff)
+    //     {
+    //         tmp.a *= 0.98f;
+
+    //         if (tmp.a < 0.5f)
+    //         {
+    //             blinkingOff = false;
+    //         }
+    //     }
+    //     else
+    //     {
+    //         tmp.a *= 1.02f;
+
+    //         if (tmp.a > 0.98f)
+    //         {
+    //             blinkingOff = true;
+    //         }
+    //     }
+    //     this.GetComponent<SpriteRenderer>().color = tmp;
+    // }
 
     public void remove()
     {
@@ -123,6 +155,7 @@ public class Unit : MonoBehaviour
         Destroy(this.gameObject);
         this.player.score += 1;
         game.selectedUnit = null;
+        isSelected = false;
         tile.isTraversable = true;
     }
 
@@ -131,7 +164,7 @@ public class Unit : MonoBehaviour
         switch (direction)
         {
             case "N":
-                if (tile.northernTile != null && tile.northernTile.unit != null && tile.northernTile.northernTile != null && tile.northernTile.northernTile.unit != null && tile.northernTile.northernTile.northernTile != null && tile.northernTile.northernTile.northernTile.unit != null && tile.northernTile.northernTile.northernTile.northernTile != null)
+                if (tile.northernTile != null && tile.northernTile.unit != null && tile.northernTile.northernTile != null && tile.northernTile.northernTile.unit != null && tile.northernTile.northernTile.northernTile != null && tile.northernTile.northernTile.northernTile.unit != null)
                 {
                     if (tile.northernTile.unit.player.startTile.Equals(player.startTile) && tile.northernTile.northernTile.unit.player.startTile.Equals(player.startTile) && !tile.northernTile.northernTile.northernTile.unit.player.startTile.Equals(player.startTile))
                     {
@@ -147,7 +180,7 @@ public class Unit : MonoBehaviour
                 }
                 break;
             case "S":
-                if (tile.southernTile != null && tile.southernTile.unit != null && tile.southernTile.southernTile != null && tile.southernTile.southernTile.unit != null && tile.southernTile.southernTile.southernTile != null && tile.southernTile.southernTile.southernTile.unit != null && tile.southernTile.southernTile.southernTile.southernTile != null)
+                if (tile.southernTile != null && tile.southernTile.unit != null && tile.southernTile.southernTile != null && tile.southernTile.southernTile.unit != null && tile.southernTile.southernTile.southernTile != null && tile.southernTile.southernTile.southernTile.unit != null)
                 {
                     if (tile.southernTile.unit.player.startTile.Equals(player.startTile) && tile.southernTile.southernTile.unit.player.startTile.Equals(player.startTile) && !tile.southernTile.southernTile.southernTile.unit.player.startTile.Equals(player.startTile))
                     {
@@ -163,7 +196,7 @@ public class Unit : MonoBehaviour
                 }
                 break;
             case "E":
-                if (tile.easternTile != null && tile.easternTile.unit != null && tile.easternTile.easternTile != null && tile.easternTile.easternTile.unit != null && tile.easternTile.easternTile.easternTile != null && tile.easternTile.easternTile.easternTile.unit != null && tile.easternTile.easternTile.easternTile.easternTile != null)
+                if (tile.easternTile != null && tile.easternTile.unit != null && tile.easternTile.easternTile != null && tile.easternTile.easternTile.unit != null && tile.easternTile.easternTile.easternTile != null && tile.easternTile.easternTile.easternTile.unit != null)
                 {
                     if (tile.easternTile.unit.player.startTile.Equals(player.startTile) && tile.easternTile.easternTile.unit.player.startTile.Equals(player.startTile) && !tile.easternTile.easternTile.easternTile.unit.player.startTile.Equals(player.startTile))
                     {
@@ -179,14 +212,14 @@ public class Unit : MonoBehaviour
                 }
                 break;
             case "W":
-                if (tile.westernTile != null && tile.westernTile.unit != null && tile.westernTile.westernTile != null && tile.westernTile.westernTile.unit != null && tile.westernTile.westernTile.westernTile != null && tile.westernTile.westernTile.westernTile.unit != null && tile.westernTile.westernTile.westernTile.westernTile != null)
+                if (tile.westernTile != null && tile.westernTile.unit != null && tile.westernTile.westernTile != null && tile.westernTile.westernTile.unit != null && tile.westernTile.westernTile.westernTile != null && tile.westernTile.westernTile.westernTile.unit != null)
                 {
                     if (tile.westernTile.unit.player.startTile.Equals(player.startTile) && tile.westernTile.westernTile.unit.player.startTile.Equals(player.startTile) && !tile.westernTile.westernTile.westernTile.unit.player.startTile.Equals(player.startTile))
                     {
                         tile.westernTile.westernTile.westernTile.unit.remove();
                     }
                 }
-                else if (tile.westernTile != null && tile.westernTile.unit != null && tile.westernTile.westernTile != null && tile.westernTile.westernTile.unit != null && tile.westernTile.westernTile.westernTile  != null)
+                else if (tile.westernTile != null && tile.westernTile.unit != null && tile.westernTile.westernTile != null && tile.westernTile.westernTile.unit != null && tile.westernTile.westernTile.westernTile != null)
                 {
                     if (tile.westernTile.unit.player.startTile.Equals(player.startTile) && !tile.westernTile.westernTile.unit.player.startTile.Equals(player.startTile) && tile.westernTile.westernTile.westernTile.isTraversable)
                     {
@@ -197,6 +230,16 @@ public class Unit : MonoBehaviour
         }
 
 
+    }
+
+    public void unselect()
+    {
+        Color tmp = this.GetComponent<SpriteRenderer>().color;
+        tmp.a = 1;
+        this.GetComponent<SpriteRenderer>().color = tmp;
+        StopCoroutine("Blink");
+        isBlinking = false;
+        isSelected = false;
     }
 
     void Update()
@@ -241,9 +284,11 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            if (this.Equals(game.selectedUnit))
+            if (isSelected && !isBlinking)
             {
-                blink();
+                StartCoroutine("Blink");
+                isBlinking = true;
+                // blink();
             }
         }
     }
