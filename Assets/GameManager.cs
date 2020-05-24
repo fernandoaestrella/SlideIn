@@ -28,11 +28,11 @@ public class GameManager : MonoBehaviour
     public GameObject inGameCanvas;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         startTime = Time.time;
         elapsedTime = 0f;
-        matchDuration = 300f;
+        matchDuration = 7f;
 
         createBoard();
 
@@ -239,12 +239,14 @@ public class GameManager : MonoBehaviour
                         if (selectedTile.isTraversable)
                         {
                             createUnit((Player)players[0]);
+                            createUnit((Player)players[0]);
                         }
                     }
                     else if (selectedTile.modifier.modifierName.Equals("GOAL"))
                     {
                         if (selectedTile.isTraversable)
                         {
+                            createUnit((Player)players[1]);
                             createUnit((Player)players[1]);
                         }
                     }

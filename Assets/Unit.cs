@@ -15,6 +15,8 @@ public class Unit : MonoBehaviour
     public bool isSelected = false;
     public bool isBlinking = false;
 
+    create
+
     void OnMouseUpAsButton()
     {
         isSelected = true;
@@ -94,7 +96,7 @@ public class Unit : MonoBehaviour
         tileToMoveTo.isTraversable = false;
     }
 
-
+    // Coroutine to optimize performance
     public IEnumerator Blink()
     {
         while (true)

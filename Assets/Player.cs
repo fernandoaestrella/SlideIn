@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Player : MonoBehaviour
 {
@@ -23,17 +25,34 @@ public class Player : MonoBehaviour
     public string PlayerName { get => playerName; set => playerName = value; }
 
 
-    private float nextActionTime = 0.0f;
-    public float period = 0.6f;
+    // private float nextActionTime = 0.0f;
+    // public float period = 0.6f;
+
+    void Start()
+    {
+         if (GameObject.Find("P2").name.Equals(playerName) && SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            StartCoroutine("RandomAI");
+        }
+    }
 
     void Update()
     {
-        if (GameObject.Find("P2").name.Equals(playerName))
+        // if (GameObject.Find("P2").name.Equals(playerName))
+        // {
+        //     if (Time.time > nextActionTime)
+        //     {
+        //         nextActionTime = Time.time + period;
+        //     }
+        // }
+    }
+
+    public IEnumerator RandomAI()
+    {
+        while (true)
         {
-            if (Time.time > nextActionTime)
-            {
-                nextActionTime = Time.time + period;
-            }
+            yield return new WaitForSeconds(0.4f);
+            
         }
     }
 }

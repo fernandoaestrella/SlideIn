@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
         // To find the build queue: File > Build Settings
     public void PlayTestMatch()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(1);
     }
 
     public void Quit()
@@ -19,6 +19,6 @@ public class MainMenu : MonoBehaviour
     public void PlaySinglePlayer()
     {
         // Play against AI
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        SceneManager.LoadScene(2);
     }
 }
