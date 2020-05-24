@@ -11,9 +11,13 @@ GameObject:
   - component: {fileID: 8232045698938814258}
   - component: {fileID: 6159666709500430168}
   - component: {fileID: 2909864606267485792}
+<<<<<<< HEAD
   - component: {fileID: 2828373056169976270}
   - component: {fileID: -4550848319757397549}
   m_Layer: 9
+=======
+  m_Layer: 0
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
   m_Name: Unit
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -46,10 +50,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee6ee6d254a21e42be278e8780eebb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   isMoving: 0
   direction: 
   position: {x: 0, y: 1, z: 0}
   game: {fileID: 0}
+=======
+  moving: 0
+  direction: W
+  position: {x: 0, y: 1, z: 0}
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
 --- !u!212 &2909864606267485792
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +74,10 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+<<<<<<< HEAD
   m_RayTracingMode: 0
+=======
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -76,7 +89,10 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+<<<<<<< HEAD
   m_ReceiveGI: 1
+=======
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -90,7 +106,11 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 641e835f9d4ff564891886f10998f87e, type: 3}
+<<<<<<< HEAD
   m_Color: {r: 0.47668213, g: 0.972549, b: 0.8342541, a: 1}
+=======
+  m_Color: {r: 0.47668213, g: 0.92941177, b: 0.8342541, a: 1}
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,6 +120,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< HEAD
 --- !u!61 &2828373056169976270
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -157,3 +178,5 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+=======
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6

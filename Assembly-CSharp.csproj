@@ -254,6 +254,7 @@
  <Reference Include="UnityEditor">
  <HintPath>D:/Program Files (x86)/2019.3.13f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
  </Reference>
+<<<<<<< HEAD
  <Reference Include="Mono.CecilX">
  <HintPath>D:/Entertainment/Unity/SlideIn/Assets/Mirror/Plugins/Mono.Cecil/Mono.CecilX.dll</HintPath>
  </Reference>
@@ -266,6 +267,8 @@
  <Reference Include="Mono.CecilX.Rocks">
  <HintPath>D:/Entertainment/Unity/SlideIn/Assets/Mirror/Plugins/Mono.Cecil/Mono.CecilX.Rocks.dll</HintPath>
  </Reference>
+=======
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
  <Reference Include="Unity.Analytics.Editor">
  <HintPath>D:/Entertainment/Unity/SlideIn/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
@@ -620,6 +623,7 @@
  <Reference Include="System.Xml.Serialization">
  <HintPath>D:/Program Files (x86)/2019.3.13f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
  </Reference>
+<<<<<<< HEAD
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
@@ -644,6 +648,8 @@
  <Reference Include="UnityEditor.UI">
  <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
+=======
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
@@ -662,9 +668,24 @@
  <Reference Include="Unity.InputSystem">
  <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
  </Reference>
+<<<<<<< HEAD
  <Reference Include="Unity.Timeline">
  <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
+=======
+ <Reference Include="Unity.TextMeshPro.Editor">
+ <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Timeline">
+ <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.CollabProxy.Editor">
+ <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ </Reference>
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
  <Reference Include="com.unity.multiplayer-weaver.Editor">
  <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
  </Reference>
@@ -674,23 +695,48 @@
  <Reference Include="Unity.Rider.Editor">
  <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
+<<<<<<< HEAD
+=======
+ <Reference Include="Unity.2D.Sprite.Editor">
+ <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Tilemap.Editor">
+ <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+ </Reference>
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
  <Reference Include="UnityEditor.SpatialTracking">
  <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
+<<<<<<< HEAD
+=======
+ <Reference Include="Unity.VisualStudio.Editor">
+ <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TextMeshPro">
+ <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ </Reference>
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
  <Reference Include="Unity.Analytics.DataPrivacy">
  <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.XR.LegacyInputHelpers">
  <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
  </Reference>
+<<<<<<< HEAD
+=======
+ <Reference Include="UnityEditor.UI">
+ <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ </Reference>
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
  <Reference Include="com.unity.multiplayer-hlapi.Runtime">
  <HintPath>D:/Entertainment/Unity/SlideIn/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ProjectReference Include="Mirror.Weaver.csproj">
       <Project>{B45EFB28-2C4A-4DA9-2419-5A5065E734A2}</Project>
       <Name>Mirror.Weaver</Name>
@@ -723,6 +769,8 @@
       <Project>{237AD673-A13D-5FD5-A5BC-F79D495B4CC1}</Project>
       <Name>Mirror.Editor</Name>
     </ProjectReference>
+=======
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

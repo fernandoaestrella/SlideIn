@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections;
+=======
+﻿using System.Collections;
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +12,7 @@ public class Unit : MonoBehaviour
     public bool isMoving;
     public string direction; //change to enum
     public Vector3 position;
+<<<<<<< HEAD
     public GameManager game;
     public Tile tile;
     bool fadingOff = true;
@@ -313,5 +318,18 @@ public class Unit : MonoBehaviour
                 // blink();
             }
         }
+=======
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
     }
 }

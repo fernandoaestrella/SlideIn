@@ -3,6 +3,10 @@ D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Assembly-CSharp.pdb
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Microsoft.Win32.Primitives.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\mscorlib.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\netstandard.dll
+<<<<<<< HEAD
+=======
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\nunit.framework.dll
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\System.AppContext.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\System.Collections.Concurrent.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\System.Collections.dll
@@ -120,6 +124,11 @@ D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.Analytics.Editor.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.Analytics.StandardEvents.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.Analytics.Tracker.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.CollabProxy.Editor.dll
+<<<<<<< HEAD
+=======
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.Locator.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.PackageManagerUI.Editor.dll
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.TextMeshPro.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.TextMeshPro.Editor.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEditor.dll
@@ -129,6 +138,10 @@ D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.AnimationModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.ARModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.AssetBundleModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.AudioModule.dll
+<<<<<<< HEAD
+=======
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.BaselibModule.dll
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.ClothModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.ClusterInputModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.ClusterRendererModule.dll
@@ -136,7 +149,13 @@ D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.CoreModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.CrashReportingModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.DirectorModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.dll
+<<<<<<< HEAD
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.GameCenterModule.dll
+=======
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.FileSystemHttpModule.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.GameCenterModule.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.GoogleAudioSpatializer.dll
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.GridModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.HotReloadModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.ImageConversionModule.dll
@@ -144,6 +163,10 @@ D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.IMGUIModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.InputModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.JSONSerializeModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.LocalizationModule.dll
+<<<<<<< HEAD
+=======
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.Networking.dll
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.ParticleSystemModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.PerformanceReportingModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.Physics2DModule.dll
@@ -155,12 +178,25 @@ D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.SpatialTracking.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.SpriteMaskModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.SpriteShapeModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.StreamingModule.dll
+<<<<<<< HEAD
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.SubstanceModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TerrainModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TerrainPhysicsModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TextCoreModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TextRenderingModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TilemapModule.dll
+=======
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.StyleSheetsModule.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.SubstanceModule.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TerrainModule.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TerrainPhysicsModule.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TestRunner.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TextCoreModule.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TextRenderingModule.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TilemapModule.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.Timeline.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TimelineModule.dll
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TLSModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.UI.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.UIElementsModule.dll
@@ -183,12 +219,27 @@ D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.WindModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.XRModule.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.Cecil.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.SerializationLogic.dll
+<<<<<<< HEAD
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\ExCSS.Unity.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.Legacy.NRefactory.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.CecilTools.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEditor.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.TextMeshPro.Editor.pdb
+=======
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.DataContract.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\ExCSS.Unity.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.Legacy.NRefactory.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.UNetWeaver.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.IvyParser.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.CecilTools.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.Cecil.Pdb.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.Cecil.Mdb.dll
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.xml
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEditor.xml
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.TextMeshPro.Editor.pdb
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.PackageManagerUI.Editor.pdb
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.CollabProxy.Editor.pdb
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.TextMeshPro.pdb
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\Unity.Analytics.DataPrivacy.pdb
@@ -198,12 +249,20 @@ D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.AccessibilityModule.xm
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.AnimationModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.AssetBundleModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.AudioModule.xml
+<<<<<<< HEAD
+=======
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.BaselibModule.xml
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.ClothModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.ClusterInputModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.ClusterRendererModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.CoreModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.CrashReportingModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.DirectorModule.xml
+<<<<<<< HEAD
+=======
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.FileSystemHttpModule.xml
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.GameCenterModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.GridModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.HotReloadModule.xml
@@ -222,6 +281,10 @@ D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.SharedInternalsModule.
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.SpriteMaskModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.SpriteShapeModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.StreamingModule.xml
+<<<<<<< HEAD
+=======
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.StyleSheetsModule.xml
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.SubstanceModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TLSModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TerrainModule.xml
@@ -229,6 +292,10 @@ D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TerrainPhysicsModule.x
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TextCoreModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TextRenderingModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TilemapModule.xml
+<<<<<<< HEAD
+=======
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TimelineModule.xml
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.UIModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.UIElementsModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.UNETModule.xml
@@ -247,11 +314,22 @@ D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.VehiclesModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.VideoModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.WindModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.XRModule.xml
+<<<<<<< HEAD
+=======
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.UI.xml
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.TestRunner.xml
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\nunit.framework.xml
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.Timeline.xml
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.Networking.xml
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.GoogleAudioSpatializer.xml
+D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.SpatialTracking.xml
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
 D:\Entertainment\Unity\SlideIn\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 D:\Entertainment\Unity\SlideIn\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
 D:\Entertainment\Unity\SlideIn\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 D:\Entertainment\Unity\SlideIn\obj\Debug\Assembly-CSharp.dll
 D:\Entertainment\Unity\SlideIn\obj\Debug\Assembly-CSharp.pdb
+<<<<<<< HEAD
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\com.unity.multiplayer-hlapi.Editor.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\com.unity.multiplayer-hlapi.Runtime.dll
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\com.unity.multiplayer-weaver.Editor.dll
@@ -290,3 +368,5 @@ D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\com.unity.multiplayer-hlapi.Runtim
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.AndroidJNIModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.DSPGraphModule.xml
 D:\Entertainment\Unity\SlideIn\Temp\bin\Debug\UnityEngine.InputLegacyModule.xml
+=======
+>>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
