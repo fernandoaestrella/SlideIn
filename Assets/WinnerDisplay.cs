@@ -29,7 +29,11 @@ public class WinnerDisplay : MonoBehaviour
 
     public void BackToMenu()
     {
+<<<<<<< HEAD
         SceneManager.LoadScene(0);
+=======
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+>>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
     }
 
     public void PlayAgain()

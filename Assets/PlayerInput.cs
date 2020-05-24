@@ -35,6 +35,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+<<<<<<< HEAD
                     ""name"": ""MoveSouth"",
                     ""type"": ""Value"",
                     ""id"": ""9e266991-b2f0-48df-a4f8-494487f40e8c"",
@@ -55,6 +56,12 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""3a4b3f0b-157a-40ee-bae9-f51e273326b6"",
                     ""expectedControlType"": ""Axis"",
+=======
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""abc279d5-2736-4d90-a3ba-8f61e3699666"",
+                    ""expectedControlType"": ""Button"",
+>>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -84,6 +91,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+<<<<<<< HEAD
                     ""id"": ""aa253004-be52-4c83-9223-de14e9850649"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
@@ -112,6 +120,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""MoveWest"",
+=======
+                    ""id"": ""24ce3f09-172f-4f1b-a2a7-bfaefdbedb6b"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+>>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -141,9 +157,13 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Select = m_Player.FindAction("Select", throwIfNotFound: true);
         m_Player_MoveNorth = m_Player.FindAction("MoveNorth", throwIfNotFound: true);
+<<<<<<< HEAD
         m_Player_MoveSouth = m_Player.FindAction("MoveSouth", throwIfNotFound: true);
         m_Player_MoveEast = m_Player.FindAction("MoveEast", throwIfNotFound: true);
         m_Player_MoveWest = m_Player.FindAction("MoveWest", throwIfNotFound: true);
+=======
+        m_Player_Newaction = m_Player.FindAction("New action", throwIfNotFound: true);
+>>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
     }
 
     public void Dispose()
@@ -195,18 +215,26 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Select;
     private readonly InputAction m_Player_MoveNorth;
+<<<<<<< HEAD
     private readonly InputAction m_Player_MoveSouth;
     private readonly InputAction m_Player_MoveEast;
     private readonly InputAction m_Player_MoveWest;
+=======
+    private readonly InputAction m_Player_Newaction;
+>>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
         public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Select => m_Wrapper.m_Player_Select;
         public InputAction @MoveNorth => m_Wrapper.m_Player_MoveNorth;
+<<<<<<< HEAD
         public InputAction @MoveSouth => m_Wrapper.m_Player_MoveSouth;
         public InputAction @MoveEast => m_Wrapper.m_Player_MoveEast;
         public InputAction @MoveWest => m_Wrapper.m_Player_MoveWest;
+=======
+        public InputAction @Newaction => m_Wrapper.m_Player_Newaction;
+>>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -222,6 +250,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @MoveNorth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveNorth;
                 @MoveNorth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveNorth;
                 @MoveNorth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveNorth;
+<<<<<<< HEAD
                 @MoveSouth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveSouth;
                 @MoveSouth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveSouth;
                 @MoveSouth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveSouth;
@@ -231,6 +260,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @MoveWest.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveWest;
                 @MoveWest.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveWest;
                 @MoveWest.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveWest;
+=======
+                @Newaction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNewaction;
+>>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -241,6 +275,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @MoveNorth.started += instance.OnMoveNorth;
                 @MoveNorth.performed += instance.OnMoveNorth;
                 @MoveNorth.canceled += instance.OnMoveNorth;
+<<<<<<< HEAD
                 @MoveSouth.started += instance.OnMoveSouth;
                 @MoveSouth.performed += instance.OnMoveSouth;
                 @MoveSouth.canceled += instance.OnMoveSouth;
@@ -250,6 +285,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @MoveWest.started += instance.OnMoveWest;
                 @MoveWest.performed += instance.OnMoveWest;
                 @MoveWest.canceled += instance.OnMoveWest;
+=======
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+>>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
             }
         }
     }
@@ -267,8 +307,12 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     {
         void OnSelect(InputAction.CallbackContext context);
         void OnMoveNorth(InputAction.CallbackContext context);
+<<<<<<< HEAD
         void OnMoveSouth(InputAction.CallbackContext context);
         void OnMoveEast(InputAction.CallbackContext context);
         void OnMoveWest(InputAction.CallbackContext context);
+=======
+        void OnNewaction(InputAction.CallbackContext context);
+>>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
     }
 }

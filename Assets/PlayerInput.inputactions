@@ -22,6 +22,7 @@
                     "interactions": ""
                 },
                 {
+<<<<<<< HEAD
                     "name": "MoveSouth",
                     "type": "Value",
                     "id": "9e266991-b2f0-48df-a4f8-494487f40e8c",
@@ -42,6 +43,12 @@
                     "type": "Value",
                     "id": "3a4b3f0b-157a-40ee-bae9-f51e273326b6",
                     "expectedControlType": "Axis",
+=======
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "abc279d5-2736-4d90-a3ba-8f61e3699666",
+                    "expectedControlType": "Button",
+>>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
                     "processors": "",
                     "interactions": ""
                 }
@@ -71,6 +78,7 @@
                 },
                 {
                     "name": "",
+<<<<<<< HEAD
                     "id": "aa253004-be52-4c83-9223-de14e9850649",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -99,6 +107,14 @@
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "MoveWest",
+=======
+                    "id": "24ce3f09-172f-4f1b-a2a7-bfaefdbedb6b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+>>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
