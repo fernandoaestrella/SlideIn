@@ -15,8 +15,6 @@ public class Unit : MonoBehaviour
     public bool isSelected = false;
     public bool isBlinking = false;
 
-    create
-
     void OnMouseUpAsButton()
     {
         isSelected = true;
@@ -34,7 +32,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    void OnMoveNorth()
+    public void OnMoveNorth()
     {
         if (moveCheck(tile.northernTile))
         {
@@ -42,7 +40,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    void OnMoveSouth()
+    public void OnMoveSouth()
     {
         if (moveCheck(tile.southernTile))
         {
@@ -50,7 +48,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    void OnMoveEast()
+    public void OnMoveEast()
     {
         if (moveCheck(tile.easternTile))
         {
@@ -58,7 +56,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    void OnMoveWest()
+    public void OnMoveWest()
     {
         if (moveCheck(tile.westernTile))
         {
@@ -153,12 +151,12 @@ public class Unit : MonoBehaviour
 
     public void remove()
     {
-        Destroy(this.GetComponent<SpriteRenderer>());
-        Destroy(this.gameObject);
-        this.player.score += 1;
-        game.selectedUnit = null;
+        isMoving = false;
         isSelected = false;
         tile.isTraversable = true;
+        this.player.team.Remove(this);
+        Destroy(this.GetComponent<SpriteRenderer>());
+        Destroy(this.gameObject);
     }
 
     void playChecker()
@@ -171,6 +169,10 @@ public class Unit : MonoBehaviour
                     if (tile.northernTile.unit.player.startTile.Equals(player.startTile) && tile.northernTile.northernTile.unit.player.startTile.Equals(player.startTile) && !tile.northernTile.northernTile.northernTile.unit.player.startTile.Equals(player.startTile))
                     {
                         tile.northernTile.northernTile.northernTile.unit.remove();
+                        tile.northernTile.northernTile.unit.remove();
+                        tile.northernTile.unit.remove();
+                        tile.unit.remove();
+                        player.score += 1;
                     }
                 }
                 else if (tile.northernTile != null && tile.northernTile.unit != null && tile.northernTile.northernTile != null && tile.northernTile.northernTile.unit != null && tile.northernTile.northernTile.northernTile != null)
@@ -187,6 +189,10 @@ public class Unit : MonoBehaviour
                     if (tile.southernTile.unit.player.startTile.Equals(player.startTile) && tile.southernTile.southernTile.unit.player.startTile.Equals(player.startTile) && !tile.southernTile.southernTile.southernTile.unit.player.startTile.Equals(player.startTile))
                     {
                         tile.southernTile.southernTile.southernTile.unit.remove();
+                        tile.southernTile.southernTile.unit.remove();
+                        tile.southernTile.unit.remove();
+                        tile.unit.remove();
+                        player.score += 1;
                     }
                 }
                 else if (tile.southernTile != null && tile.southernTile.unit != null && tile.southernTile.southernTile != null && tile.southernTile.southernTile.unit != null && tile.southernTile.southernTile.southernTile != null)
@@ -203,6 +209,10 @@ public class Unit : MonoBehaviour
                     if (tile.easternTile.unit.player.startTile.Equals(player.startTile) && tile.easternTile.easternTile.unit.player.startTile.Equals(player.startTile) && !tile.easternTile.easternTile.easternTile.unit.player.startTile.Equals(player.startTile))
                     {
                         tile.easternTile.easternTile.easternTile.unit.remove();
+                        tile.easternTile.easternTile.unit.remove();
+                        tile.easternTile.unit.remove();
+                        tile.unit.remove();
+                        player.score += 1;
                     }
                 }
                 else if (tile.easternTile != null && tile.easternTile.unit != null && tile.easternTile.easternTile != null && tile.easternTile.easternTile.unit != null && tile.easternTile.easternTile.easternTile != null)
@@ -219,6 +229,10 @@ public class Unit : MonoBehaviour
                     if (tile.westernTile.unit.player.startTile.Equals(player.startTile) && tile.westernTile.westernTile.unit.player.startTile.Equals(player.startTile) && !tile.westernTile.westernTile.westernTile.unit.player.startTile.Equals(player.startTile))
                     {
                         tile.westernTile.westernTile.westernTile.unit.remove();
+                        tile.westernTile.westernTile.unit.remove();
+                        tile.westernTile.unit.remove();
+                        tile.unit.remove();
+                        player.score += 1;
                     }
                 }
                 else if (tile.westernTile != null && tile.westernTile.unit != null && tile.westernTile.westernTile != null && tile.westernTile.westernTile.unit != null && tile.westernTile.westernTile.westernTile != null)
@@ -250,6 +264,7 @@ public class Unit : MonoBehaviour
         {
             if (tile.Equals(player.goalTile))
             {
+                player.score += 2;
                 remove();
             }
             else
@@ -277,9 +292,14 @@ public class Unit : MonoBehaviour
                     {
                         playChecker();
                     }
-                    direction = "";
-                    isMoving = false;
-                    tile.isTraversable = false;
+
+                    if (((Player)player).team.Contains(this))
+                    {
+                        direction = "";
+                        isMoving = false;
+                        tile.isTraversable = false;
+
+                    }
                 }
             }
 

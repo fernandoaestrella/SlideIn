@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     {
         startTime = Time.time;
         elapsedTime = 0f;
-        matchDuration = 7f;
+        matchDuration = 40f;
 
         createBoard();
 
@@ -73,28 +73,10 @@ public class GameManager : MonoBehaviour
         ((Player)players[1]).unitColor = new Color(1.0f, 0.4f, 0.8f, 1);
     }
 
-    private Unit createUnit(Player player)
-    {
-        Unit newUnit = Instantiate(unit);
-        newUnit.game = this;
-        newUnit.tile = currentGameBoard.board[player.StartX, player.StartY];
-        newUnit.player = (Player)player;
-        newUnit.isMoving = false;
-        // Tell unit which position it holds
-        newUnit.position = currentGameBoard.board[player.StartX, player.StartY].GetComponent<Transform>().position;
-        // Move unit to its position
-        newUnit.GetComponent<Transform>().position = newUnit.position;
-        // Tell tile which unit it holds
-        currentGameBoard.board[player.StartX, player.StartY].unit = newUnit;
-        // Makes that tile untraversable
-        currentGameBoard.board[player.StartX, player.StartY].isTraversable = false;
-        // Color unit
-        newUnit.GetComponent<SpriteRenderer>().color = player.unitColor;
-        // Add unit to player's team
-        player.team.Add(newUnit);
-
-        return newUnit;
-    }
+    // private Unit createUnit(Player player)
+    // {
+        
+    // }
 
     private void createBoard()
     {
@@ -238,16 +220,14 @@ public class GameManager : MonoBehaviour
                     {
                         if (selectedTile.isTraversable)
                         {
-                            createUnit((Player)players[0]);
-                            createUnit((Player)players[0]);
+                            ((Player)players[0]).createUnit();
                         }
                     }
                     else if (selectedTile.modifier.modifierName.Equals("GOAL"))
                     {
                         if (selectedTile.isTraversable)
                         {
-                            createUnit((Player)players[1]);
-                            createUnit((Player)players[1]);
+                            ((Player)players[1]).createUnit();
                         }
                     }
                 }

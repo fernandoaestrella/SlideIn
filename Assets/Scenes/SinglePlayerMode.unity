@@ -516,8 +516,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5, y: -34}
-  m_SizeDelta: {x: -880.448, y: -739.52405}
+  m_AnchoredPosition: {x: 5, y: -29.2}
+  m_SizeDelta: {x: -880.448, y: -735.19586}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1054270942
 MonoBehaviour:
@@ -836,7 +836,7 @@ MonoBehaviour:
   startTile: {fileID: 0}
   goalTile: {fileID: 0}
   game: {fileID: 0}
-  period: 0.6
+  unit: {fileID: 6159666709500430168, guid: a0676b4699f127e4db71cc42cb3d60dd, type: 3}
 --- !u!4 &1380091971
 Transform:
   m_ObjectHideFlags: 0

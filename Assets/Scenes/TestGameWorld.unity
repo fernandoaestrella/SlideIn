@@ -326,7 +326,7 @@ MonoBehaviour:
   startTile: {fileID: 0}
   goalTile: {fileID: 0}
   game: {fileID: 0}
-  period: 0.6
+  unit: {fileID: 6159666709500430168, guid: a0676b4699f127e4db71cc42cb3d60dd, type: 3}
 --- !u!4 &34073300
 Transform:
   m_ObjectHideFlags: 0

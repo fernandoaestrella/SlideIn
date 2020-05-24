@@ -1191,15 +1191,15 @@ MonoBehaviour:
     Use
     W, A, S, D or swipe to move selected unit.
 
-    Get unit to opposing goal.
+    Get unit to opposing goal and
+    you get 2 points.
 
-    If
-    2 units of a team collide and there was a third unit behind them of an opposing
-    team, the opposing unit is pushed back one square (if the square is empty).
+    If 2 units of a team collide and there was a third unit
+    behind them of an opposing team, the opposing unit is pushed back one square
+    (if the square is empty).
 
-    If
-    3 units of a team collide in front of an opposing unit, the opposing unit is
-    removed.'
+    If 3 units of a team collide in front of an opposing
+    unit, the opposing unit is removed and the pushing team earns a point.'
 --- !u!222 &444402280
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3197,8 +3197,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.079}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.49453735, y: 0.0000076293945}
-  m_SizeDelta: {x: -0.9891052, y: 0.0000076293945}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 30.22116, y: 0.0000076293945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1166576120
 MonoBehaviour:
@@ -3232,7 +3232,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: TEST MATCH
+  m_Text: SINGLE PLAYER
 --- !u!222 &1166576121
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4625,7 +4625,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 128154622}
-        m_MethodName: PlayTestMatch
+        m_MethodName: PlaySinglePlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

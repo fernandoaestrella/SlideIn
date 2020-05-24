@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public Tile goalTile;
     public GameManager game;
     string playerName;
+    public Unit unit;
+
 
     public int GoalX { get => goalX; set => goalX = value; }
     public int GoalY { get => goalY; set => goalY = value; }
@@ -30,29 +32,93 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-         if (GameObject.Find("P2").name.Equals(playerName) && SceneManager.GetActiveScene().buildIndex == 2)
+        if (GameObject.Find("P2").name.Equals(playerName) && SceneManager.GetActiveScene().buildIndex == 2)
         {
             StartCoroutine("RandomAI");
         }
     }
 
-    void Update()
+    public void createUnit()
     {
-        // if (GameObject.Find("P2").name.Equals(playerName))
-        // {
-        //     if (Time.time > nextActionTime)
-        //     {
-        //         nextActionTime = Time.time + period;
-        //     }
-        // }
+        Unit newUnit = Instantiate(unit);
+        newUnit.game = game;
+        newUnit.tile = startTile;
+        newUnit.player = this;
+        newUnit.isMoving = false;
+        // Tell unit which position it holds
+        newUnit.position = newUnit.tile.GetComponent<Transform>().position;
+        // Move unit to its position
+        newUnit.GetComponent<Transform>().position = newUnit.position;
+        // Tell tile which unit it holds
+        startTile.unit = newUnit;
+        // Makes that tile untraversable
+        startTile.isTraversable = false;
+        // Color unit
+        newUnit.GetComponent<SpriteRenderer>().color = unitColor;
+        // Add unit to player's team
+        team.Add(newUnit);
     }
+
+    // void Update()
+    // {
+    //     // if (GameObject.Find("P2").name.Equals(playerName))
+    //     // {
+    //     //     if (Time.time > nextActionTime)
+    //     //     {
+    //     //         nextActionTime = Time.time + period;
+    //     //     }
+    //     // }
+    // }
 
     public IEnumerator RandomAI()
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.4f);
-            
+            yield return new WaitForSeconds(0.15f);
+            bool foundAction = false;
+
+            while (!foundAction)
+            {
+                int randomAction = UnityEngine.Random.Range(0, 10);
+                if (randomAction > 4)
+                {
+                    if (startTile.unit == null)
+                    {
+                        createUnit();
+                        foundAction = true;
+                    }
+                }
+                else
+                {
+                    if (team.Count > 0)
+                    {
+                        int randomUnit = UnityEngine.Random.Range(0, team.Count);
+                        Unit selectedUnit = ((Unit)team[randomUnit]);
+                        selectedUnit.isSelected = true;
+                        int randomDirection = UnityEngine.Random.Range(0, 4);
+                        switch (randomDirection)
+                        {
+                            case 0:
+                                selectedUnit.OnMoveNorth();
+                                break;
+                                case 1:
+                                selectedUnit.OnMoveSouth();
+                                break;
+                                case 2:
+                                selectedUnit.OnMoveEast();
+                                break;
+                                case 3:
+                                selectedUnit.OnMoveWest();
+                                break;
+                            default:
+                                break;
+                        }
+                        selectedUnit.unselect();
+
+                        foundAction = true;
+                    }
+                }
+            }
         }
     }
 }
