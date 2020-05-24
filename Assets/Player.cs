@@ -1,11 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-<<<<<<< HEAD
 using UnityEngine.SceneManagement;
 
-=======
->>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
 
 public class Player : MonoBehaviour
 {
@@ -16,21 +13,17 @@ public class Player : MonoBehaviour
     private int goalX;
     private int goalY;
     public Color unitColor;
-<<<<<<< HEAD
     public Tile startTile;
     public Tile goalTile;
     public GameManager game;
     string playerName;
     public Unit unit;
 
-=======
->>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
 
     public int GoalX { get => goalX; set => goalX = value; }
     public int GoalY { get => goalY; set => goalY = value; }
     public int StartX { get => startX; set => startX = value; }
     public int StartY { get => startY; set => startY = value; }
-<<<<<<< HEAD
     public string PlayerName { get => playerName; set => playerName = value; }
 
 
@@ -128,6 +121,4 @@ public class Player : MonoBehaviour
             }
         }
     }
-=======
->>>>>>> 4484e39fbc2d62ea628fb270dbf2729c8de6881e
 }
