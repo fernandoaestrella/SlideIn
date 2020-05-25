@@ -62,6 +62,6 @@ sysinfo.txt
 crashlytics-build.properties
 
 Temp
-Library
+Library/*
 Library/ArtifactDB
 ##

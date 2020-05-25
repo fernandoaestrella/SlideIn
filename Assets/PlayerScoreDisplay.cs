@@ -12,6 +12,6 @@ public class PlayerScoreDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Player 1 Score: " + ((Player)game.players[0]).score + "\n\n\nPlayer 2 Score: " + ((Player)game.players[1]).score;
+        scoreText.text = "Player 1 Score: " + ((Player)game.players[0]).score + "                                  Player 2 Score: " + ((Player)game.players[1]).score;
     }
 }

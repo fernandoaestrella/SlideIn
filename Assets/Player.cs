@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+// [RequireComponent(typeof(PlayerInput))]
 
 public class Player : MonoBehaviour
 {
@@ -70,6 +70,65 @@ public class Player : MonoBehaviour
     //     // }
     // }
 
+    public void OnMoveNorth()
+    {
+        foreach (Unit unit in team)
+        {
+            if (unit.isSelected)
+            {
+                if (unit.moveCheck(unit.tile.northernTile))
+                {
+                    unit.move(unit.tile.northernTile, "N");
+                }
+            }
+        }
+    }
+
+    public void OnMoveSouth()
+    {
+
+        foreach (Unit unit in team)
+        {
+            if (unit.isSelected)
+            {
+                if (unit.moveCheck(unit.tile.southernTile))
+                {
+                    unit.move(unit.tile.southernTile, "S");
+                }
+            }
+        }
+    }
+
+    public void OnMoveEast()
+    {
+
+        foreach (Unit unit in team)
+        {
+            if (unit.isSelected)
+            {
+                if (unit.moveCheck(unit.tile.easternTile))
+                {
+                    unit.move(unit.tile.easternTile, "E");
+                }
+            }
+        }
+    }
+
+    public void OnMoveWest()
+    {
+
+        foreach (Unit unit in team)
+        {
+            if (unit.isSelected)
+            {
+                if (unit.moveCheck(unit.tile.westernTile))
+                {
+                    unit.move(unit.tile.westernTile, "W");
+                }
+            }
+        }
+    }
+
     public IEnumerator RandomAI()
     {
         while (true)
@@ -99,16 +158,16 @@ public class Player : MonoBehaviour
                         switch (randomDirection)
                         {
                             case 0:
-                                selectedUnit.OnMoveNorth();
+                                OnMoveNorth();
                                 break;
-                                case 1:
-                                selectedUnit.OnMoveSouth();
+                            case 1:
+                                OnMoveSouth();
                                 break;
-                                case 2:
-                                selectedUnit.OnMoveEast();
+                            case 2:
+                                OnMoveEast();
                                 break;
-                                case 3:
-                                selectedUnit.OnMoveWest();
+                            case 3:
+                                OnMoveWest();
                                 break;
                             default:
                                 break;

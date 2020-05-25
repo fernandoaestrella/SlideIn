@@ -13,13 +13,15 @@ public class WinnerDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (((Player)game.players[0]).score > ((Player)game.players[1]).score)
+        int p1score = ((Player)game.players[0]).score;
+        int p2score = ((Player)game.players[1]).score;
+        if ( p1score > p2score)
         {
-            matchResultsText.text = "P1 WINS";
+            matchResultsText.text = "P1 WINS! P1: " + p1score + ", P2: " + p2score;
         }
-        else if (((Player)game.players[0]).score < ((Player)game.players[1]).score)
+        else if (p1score < p2score)
         {
-            matchResultsText.text = "P2 WINS";
+            matchResultsText.text = "P2 WINS! P1: " + p1score + ", P2: " + p2score;
         }
         else
         {

@@ -3,9 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Tile
-  - Unit
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -15,13 +13,8 @@ TagManager:
   - UI
   - 
   - 
-<<<<<<< HEAD
-  - Game Board
+  - Tile
   - Player
-=======
-  - 
-  - 
->>>>>>> 6d940a05425dd8e3018fd3826b71c968b53557b6
   - 
   - 
   - 

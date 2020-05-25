@@ -58,14 +58,14 @@ public class GameManager : MonoBehaviour
         // Set player 1 starting position
         ((Player)players[0]).StartX = 1;
         ((Player)players[0]).StartY = 4;
-        ((Player)players[0]).startTile = this.currentGameBoard.board[1, 4];
-        ((Player)players[0]).goalTile = this.currentGameBoard.board[11, 4];
+        ((Player)players[0]).startTile = currentGameBoard.board[1, 4];
+        ((Player)players[0]).goalTile = currentGameBoard.board[11, 4];
 
 
         ((Player)players[1]).StartX = 11;
         ((Player)players[1]).StartY = 4;
-        ((Player)players[1]).startTile = this.currentGameBoard.board[11, 4];
-        ((Player)players[1]).goalTile = this.currentGameBoard.board[1, 4];
+        ((Player)players[1]).startTile = currentGameBoard.board[11, 4];
+        ((Player)players[1]).goalTile = currentGameBoard.board[1, 4];
 
 
         // Set team colors
@@ -108,9 +108,8 @@ public class GameManager : MonoBehaviour
                 // }
 
                 // Save the tile in the gameboard
+                currentTile.game = this;
                 currentGameBoard.board[i, j] = currentTile;
-
-                // Debug.Log(i + ", " + j);
             }
         }
 
@@ -187,54 +186,54 @@ public class GameManager : MonoBehaviour
             // Stop controlling players
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            int layerMask = 1 << 9;
-            Vector2 origin = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-            RaycastHit2D hit = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, layerMask);
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     // int layerMask = 1 << 9;
+        //     // Vector2 origin = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+        //     // RaycastHit2D hit = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, layerMask);
 
-            //Does the ray intersect any objects which are in the player layer.
-            if ((hit.transform != null) && (hit.transform.gameObject.name.Equals("Unit(Clone)")))
-            {
-            }
-            else
-            {
-                hit = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, ~layerMask);
+        //     //Does the ray intersect any objects which are in the player layer.
+        //     // if ((hit.transform != null) && (hit.transform.gameObject.name.Equals("Unit(Clone)")))
+        //     // {
+        //     // }
+        //     // else
+        //     // {
+        //     //     // hit = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, ~layerMask);
 
-                // Does the ray intersect any tile in the game board layer.
-                if (hit.transform.gameObject.name.Equals("Tile(Clone)"))
-                {
-                    foreach (Player player in players)
-                    {
-                        foreach (Unit unit in player.team)
-                        {
-                            if (unit.isSelected == true)
-                            {
-                                unit.unselect();
-                            }
-                        }
-                    }
+        //     //     // // Does the ray intersect any tile in the game board layer.
+        //     //     // if (hit.transform.gameObject.name.Equals("Tile(Clone)"))
+        //     //     // {
+        //     //     //     // foreach (Player player in players)
+        //     //     //     // {
+        //     //     //     //     foreach (Unit unit in player.team)
+        //     //     //     //     {
+        //     //     //     //         if (unit.isSelected == true)
+        //     //     //     //         {
+        //     //     //     //             unit.unselect();
+        //     //     //     //         }
+        //     //     //     //     }
+        //     //     //     // }
 
-                    Tile selectedTile = hit.transform.gameObject.GetComponent<Tile>();
-                    if (selectedTile.modifier.modifierName.Equals("START"))
-                    {
-                        if (selectedTile.isTraversable)
-                        {
-                            ((Player)players[0]).createUnit();
-                        }
-                    }
-                    else if (selectedTile.modifier.modifierName.Equals("GOAL"))
-                    {
-                        if (selectedTile.isTraversable)
-                        {
-                            ((Player)players[1]).createUnit();
-                        }
-                    }
-                }
-            }
+        //     //     //     // Tile selectedTile = hit.transform.gameObject.GetComponent<Tile>();
+        //     //     //     // if (selectedTile.modifier.modifierName.Equals("START"))
+        //     //     //     // {
+        //     //     //     //     if (selectedTile.isTraversable)
+        //     //     //     //     {
+        //     //     //     //         ((Player)players[0]).createUnit();
+        //     //     //     //     }
+        //     //     //     // }
+        //     //     //     // else if (selectedTile.modifier.modifierName.Equals("GOAL"))
+        //     //     //     // {
+        //     //     //     //     if (selectedTile.isTraversable)
+        //     //     //     //     {
+        //     //     //     //         ((Player)players[1]).createUnit();
+        //     //     //     //     }
+        //     //     //     // }
+        //     //     // }
+        //     // }
 
-            // What if you hit outside the gameboard?
-        }
+        //     // What if you hit outside the gameboard?
+        // }
         // float horizontalMovement = Input.GetAxis("Horizontal");
         // float verticalMovement = Input.GetAxis("Vertical");
     }

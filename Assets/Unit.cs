@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// using UnityEngine.InputSystem;
 
 public class Unit : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class Unit : MonoBehaviour
         isSelected = true;
     }
 
-    Boolean moveCheck(Tile tileToMoveTo)
+    public Boolean moveCheck(Tile tileToMoveTo)
     {
         if ((isMoving == false) && isSelected && unitCanMove(tileToMoveTo))
         {
@@ -29,38 +30,6 @@ public class Unit : MonoBehaviour
         else
         {
             return false;
-        }
-    }
-
-    public void OnMoveNorth()
-    {
-        if (moveCheck(tile.northernTile))
-        {
-            move(tile.northernTile, "N");
-        }
-    }
-
-    public void OnMoveSouth()
-    {
-        if (moveCheck(tile.southernTile))
-        {
-            move(tile.southernTile, "S");
-        }
-    }
-
-    public void OnMoveEast()
-    {
-        if (moveCheck(tile.easternTile))
-        {
-            move(tile.easternTile, "E");
-        }
-    }
-
-    public void OnMoveWest()
-    {
-        if (moveCheck(tile.westernTile))
-        {
-            move(tile.westernTile, "W");
         }
     }
 
