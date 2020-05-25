@@ -15,7 +15,6 @@ public class Tile : MonoBehaviour
 
     void OnMouseUpAsButton()
     {
-        Debug.Log(game);
         if (modifier.modifierName.Equals("START"))
         {
             if (isTraversable)
@@ -30,16 +29,14 @@ public class Tile : MonoBehaviour
                 ((Player)game.players[1]).createUnit();
             }
         }
-        else
+
+        foreach (Player player in game.players)
         {
-            foreach (Player player in game.players)
+            foreach (Unit unit in player.team)
             {
-                foreach (Unit unit in player.team)
+                if (unit.isSelected == true)
                 {
-                    if (unit.isSelected == true)
-                    {
-                        unit.unselect();
-                    }
+                    unit.unselect();
                 }
             }
         }

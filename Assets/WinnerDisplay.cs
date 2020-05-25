@@ -36,6 +36,7 @@ public class WinnerDisplay : MonoBehaviour
 
     public void PlayAgain()
     {
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

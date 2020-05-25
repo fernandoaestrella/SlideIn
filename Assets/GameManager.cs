@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 
 //Debug.Log(Time.deltaTime);
 public class GameManager : MonoBehaviour
@@ -21,10 +23,16 @@ public class GameManager : MonoBehaviour
     Tile westernTile;
     Tile northernTile;
     Tile southernTile;
+    public ScreenControl p1Control;
+    int p1StartX = 1;
+    int p1StartY = 5;
+    int p2StartX = 11;
+    int p2StartY = 3;
 
     public float startTime;
     public float elapsedTime;
     public float matchDuration;
+    public GameObject matchFinishedCanvas;
     public GameObject inGameCanvas;
 
     // Start is called before the first frame update
@@ -33,6 +41,7 @@ public class GameManager : MonoBehaviour
         startTime = Time.time;
         elapsedTime = 0f;
         matchDuration = 40f;
+        Time.timeScale = 1; // Unpauses the game
 
         createBoard();
 
@@ -41,12 +50,19 @@ public class GameManager : MonoBehaviour
         // players.Insert(1, new Player(this));
         // Player p = new Player(this);
         // GameObject.Find("Player").GetComponent<Player>();
-        Player p =  Instantiate(player);
+        Player p = Instantiate(player);
         p.name = "P1";
         p.PlayerName = "P1";
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            GameObject.Find("Move East Button").GetComponent<ScreenControl>().player = p;
+            GameObject.Find("Move West Button").GetComponent<ScreenControl>().player = p;
+            GameObject.Find("Move North Button").GetComponent<ScreenControl>().player = p;
+            GameObject.Find("Move South Button").GetComponent<ScreenControl>().player = p;
+        }
         players.Insert(0, p);
-        
-        p =  Instantiate(player);
+
+        p = Instantiate(player);
         p.name = "P2";
         p.PlayerName = "P2";
         players.Insert(1, p);
@@ -56,16 +72,12 @@ public class GameManager : MonoBehaviour
         ((Player)players[1]).team = new ArrayList(16); // Initial size set to avoid some overflow cycles
 
         // Set player 1 starting position
-        ((Player)players[0]).StartX = 1;
-        ((Player)players[0]).StartY = 4;
-        ((Player)players[0]).startTile = currentGameBoard.board[1, 4];
-        ((Player)players[0]).goalTile = currentGameBoard.board[11, 4];
+        ((Player)players[0]).startTile = currentGameBoard.board[p1StartX, p1StartY];
+        ((Player)players[0]).goalTile = currentGameBoard.board[p2StartX, p2StartY];
 
 
-        ((Player)players[1]).StartX = 11;
-        ((Player)players[1]).StartY = 4;
-        ((Player)players[1]).startTile = currentGameBoard.board[11, 4];
-        ((Player)players[1]).goalTile = currentGameBoard.board[1, 4];
+        ((Player)players[1]).startTile = currentGameBoard.board[p2StartX, p2StartY];
+        ((Player)players[1]).goalTile = currentGameBoard.board[p1StartX, p1StartY];
 
 
         // Set team colors
@@ -75,7 +87,7 @@ public class GameManager : MonoBehaviour
 
     // private Unit createUnit(Player player)
     // {
-        
+
     // }
 
     private void createBoard()
@@ -147,10 +159,10 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        currentGameBoard.board[1, 4].modifier.modifierName = "START";
-        currentGameBoard.board[1, 4].GetComponent<SpriteRenderer>().color = Color.blue;
-        currentGameBoard.board[11, 4].modifier.modifierName = "GOAL";
-        currentGameBoard.board[11, 4].GetComponent<SpriteRenderer>().color = Color.red;
+        currentGameBoard.board[p1StartX, p1StartY].modifier.modifierName = "START";
+        currentGameBoard.board[p1StartX, p1StartY].GetComponent<SpriteRenderer>().color = Color.blue;
+        currentGameBoard.board[p2StartX, p2StartY].modifier.modifierName = "GOAL";
+        currentGameBoard.board[p2StartX, p2StartY].GetComponent<SpriteRenderer>().color = Color.red;
 
         // Random placement of untraversable blocks
         for (int i = 0; i < 22; i++)
@@ -181,7 +193,9 @@ public class GameManager : MonoBehaviour
         elapsedTime = Time.time - startTime;
         if (elapsedTime > matchDuration)
         {
-            inGameCanvas.SetActive(true);
+            Time.timeScale = 0; // Pauses the game
+            matchFinishedCanvas.SetActive(true);
+            inGameCanvas.SetActive(false);
 
             // Stop controlling players
         }
