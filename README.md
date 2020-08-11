@@ -4,4 +4,6 @@ A game in which teams summon units in a table top gameboard. The goal is to slid
 
 <img src="slide-in-image.png?raw=true"/>
 
+More features are planned.
+
 Versions for Android and Windows available.
